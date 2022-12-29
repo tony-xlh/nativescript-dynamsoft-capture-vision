@@ -16,3 +16,11 @@ android {
     additionalParameters "--no-version-vectors"
   }
 }
+
+rootProject.allprojects {
+    repositories {
+        maven {
+            url "https://download2.dynamsoft.com/maven/aar"
+        }
+    }
+}
