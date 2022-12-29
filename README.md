@@ -5,7 +5,7 @@ npm run setup
 npm start
 ```
 
-- @xulihang
+- [nativescript-dynamsoft-camera-enhancer](packages/nativescript-dynamsoft-camera-enhancer/README.md)
 
 # How to use?
 

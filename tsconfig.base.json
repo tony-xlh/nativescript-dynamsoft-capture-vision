@@ -28,6 +28,9 @@
       ],
       "@xulihang/*": [
         "packages/*"
+      ],
+      "nativescript-dynamsoft-camera-enhancer": [
+        "packages/nativescript-dynamsoft-camera-enhancer/index.d.ts"
       ]
     }
   },

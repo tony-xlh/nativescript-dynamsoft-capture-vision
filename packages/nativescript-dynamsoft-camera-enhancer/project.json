@@ -1,0 +1,73 @@
+{
+  "name": "nativescript-dynamsoft-camera-enhancer",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/nativescript-dynamsoft-camera-enhancer",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "outputPath": "dist/packages/nativescript-dynamsoft-camera-enhancer",
+        "tsConfig": "packages/nativescript-dynamsoft-camera-enhancer/tsconfig.json",
+        "packageJson": "packages/nativescript-dynamsoft-camera-enhancer/package.json",
+        "main": "packages/nativescript-dynamsoft-camera-enhancer/index.d.ts",
+        "assets": [
+          "packages/nativescript-dynamsoft-camera-enhancer/*.md",
+          "packages/nativescript-dynamsoft-camera-enhancer/index.d.ts",
+          "LICENSE",
+          {
+            "glob": "**/*",
+            "input": "packages/nativescript-dynamsoft-camera-enhancer/platforms/",
+            "output": "./platforms/"
+          }
+        ],
+        "dependsOn": [
+          {
+            "target": "build.all",
+            "projects": "dependencies"
+          }
+        ]
+      }
+    },
+    "build.all": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "node tools/scripts/build-finish.ts nativescript-dynamsoft-camera-enhancer"
+        ],
+        "parallel": false
+      },
+      "outputs": [
+        "dist/packages/nativescript-dynamsoft-camera-enhancer"
+      ],
+      "dependsOn": [
+        {
+          "target": "build.all",
+          "projects": "dependencies"
+        },
+        {
+          "target": "build",
+          "projects": "self"
+        }
+      ]
+    },
+    "focus": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx g @nativescript/plugin-tools:focus-packages nativescript-dynamsoft-camera-enhancer"
+        ],
+        "parallel": false
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "packages/nativescript-dynamsoft-camera-enhancer/**/*.ts"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

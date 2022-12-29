@@ -61,7 +61,14 @@ module.exports = {
     // packages
     // build output is always in dist/packages
     '@xulihang': {
-      'build-all': {
+      // nativescript-dynamsoft-camera-enhancer
+			'nativescript-dynamsoft-camera-enhancer': {
+				build: {
+					script: 'nx run nativescript-dynamsoft-camera-enhancer:build.all',
+					description: 'nativescript-dynamsoft-camera-enhancer: Build',
+				},
+			},
+			'build-all': {
         script: 'nx run-many --target=build.all --all',
         description: 'Build all packages',
       },
@@ -71,7 +78,11 @@ module.exports = {
       description: '_____________  Focus (VS Code supported)  _____________',
     },
     focus: {
-      reset: {
+      'nativescript-dynamsoft-camera-enhancer': {
+				script: 'nx run nativescript-dynamsoft-camera-enhancer:focus',
+				description: 'Focus on nativescript-dynamsoft-camera-enhancer',
+			},
+			reset: {
         script: 'nx g @xulihang/plugin-tools:focus-packages',
         description: 'Reset Focus',
       },
