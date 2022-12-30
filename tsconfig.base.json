@@ -31,6 +31,9 @@
       ],
       "nativescript-dynamsoft-camera-enhancer": [
         "packages/nativescript-dynamsoft-camera-enhancer/index.d.ts"
+      ],
+      "nativescript-dynamsoft-barcode-reader": [
+        "packages/nativescript-dynamsoft-barcode-reader/index.d.ts"
       ]
     }
   },

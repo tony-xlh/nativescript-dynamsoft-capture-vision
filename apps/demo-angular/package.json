@@ -2,7 +2,8 @@
   "main": "./src/main.ts",
   "dependencies": {
     "@nativescript/core": "file:../../node_modules/@nativescript/core",
-    "nativescript-dynamsoft-camera-enhancer": "file:../../dist/packages/nativescript-dynamsoft-camera-enhancer"
+    "nativescript-dynamsoft-camera-enhancer": "file:../../dist/packages/nativescript-dynamsoft-camera-enhancer",
+    "nativescript-dynamsoft-barcode-reader": "file:../../dist/packages/nativescript-dynamsoft-barcode-reader"
   },
   "devDependencies": {
     "@nativescript/android": "~8.4.0",

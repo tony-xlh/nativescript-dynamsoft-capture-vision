@@ -68,6 +68,13 @@ module.exports = {
 					description: 'nativescript-dynamsoft-camera-enhancer: Build',
 				},
 			},
+			// nativescript-dynamsoft-barcode-reader
+			'nativescript-dynamsoft-barcode-reader': {
+				build: {
+					script: 'nx run nativescript-dynamsoft-barcode-reader:build.all',
+					description: 'nativescript-dynamsoft-barcode-reader: Build',
+				},
+			},
 			'build-all': {
         script: 'nx run-many --target=build.all --all',
         description: 'Build all packages',
@@ -81,6 +88,10 @@ module.exports = {
       'nativescript-dynamsoft-camera-enhancer': {
 				script: 'nx run nativescript-dynamsoft-camera-enhancer:focus',
 				description: 'Focus on nativescript-dynamsoft-camera-enhancer',
+			},
+			'nativescript-dynamsoft-barcode-reader': {
+				script: 'nx run nativescript-dynamsoft-barcode-reader:focus',
+				description: 'Focus on nativescript-dynamsoft-barcode-reader',
 			},
 			reset: {
         script: 'nx g @xulihang/plugin-tools:focus-packages',

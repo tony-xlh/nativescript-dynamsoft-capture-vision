@@ -7,6 +7,9 @@ import { Component } from '@angular/core';
 export class HomeComponent {
 	demos = [
 	{
+		name: 'nativescript-dynamsoft-barcode-reader'
+	},
+	{
 		name: 'nativescript-dynamsoft-camera-enhancer'
 	}
 ];

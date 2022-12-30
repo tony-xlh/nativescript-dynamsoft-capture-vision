@@ -3,7 +3,8 @@
   "projects": {
     "demo": "apps/demo",
     "demo-angular": "apps/demo-angular",
-    "nativescript-dynamsoft-camera-enhancer": "packages/nativescript-dynamsoft-camera-enhancer"
+    "nativescript-dynamsoft-camera-enhancer": "packages/nativescript-dynamsoft-camera-enhancer",
+    "nativescript-dynamsoft-barcode-reader": "packages/nativescript-dynamsoft-barcode-reader"
   },
   "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }

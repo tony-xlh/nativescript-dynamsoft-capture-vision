@@ -1,10 +1,4 @@
-# @xulihang/\* plugins
-
-```
-npm run setup
-npm start
-```
-
+- [nativescript-dynamsoft-barcode-reader](packages/nativescript-dynamsoft-barcode-reader/README.md)
 - [nativescript-dynamsoft-camera-enhancer](packages/nativescript-dynamsoft-camera-enhancer/README.md)
 
 # How to use?
