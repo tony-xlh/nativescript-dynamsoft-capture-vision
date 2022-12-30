@@ -1,0 +1,3 @@
+dependencies {
+    implementation 'com.dynamsoft:dynamsoftbarcodereader:9.6.0@aar'
+}
