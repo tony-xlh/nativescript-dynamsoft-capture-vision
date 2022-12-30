@@ -1,5 +1,7 @@
-import { NativescriptDynamsoftCameraEnhancerCommon } from './common';
+import { DynamsoftCameraEnhancerCommon } from './common';
 
-export declare class NativescriptDynamsoftCameraEnhancer extends NativescriptDynamsoftCameraEnhancerCommon {
-    
+export declare class DynamsoftCameraEnhancer extends DynamsoftCameraEnhancerCommon {
+    captureFrame(): any;
+    getAllCameras(): string[];
+    getSelectedCamera(): string;
 }
