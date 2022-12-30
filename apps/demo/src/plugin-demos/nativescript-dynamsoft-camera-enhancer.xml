@@ -1,13 +1,12 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" 
     xmlns:dce="nativescript-dynamsoft-camera-enhancer"
     navigatingTo="navigatingTo" class="page">
-    <Page.actionBar>
-        <ActionBar title="nativescript-dynamsoft-camera-enhancer" icon="" class="action-bar">
-        </ActionBar>
-    </Page.actionBar>
-    <StackLayout class="p-20">
-        <ScrollView class="h-full">
-            <dce:DynamsoftCameraEnhancer active="{{isActive}}"></dce:DynamsoftCameraEnhancer>
-        </ScrollView>
-    </StackLayout>
+    <GridLayout rows="*, auto, auto">
+        <dce:DynamsoftCameraEnhancer rowSpan="3" active="{{isActive}}"></dce:DynamsoftCameraEnhancer>
+        <StackLayout row="1">
+            <Button text="Switch Torch" tap="onSwitchTorch"></Button>
+            <Button text="Switch Camera" tap="onSwitchCamera"></Button>
+            <Button text="Capture Frame" tap="onCaptureFrame"></Button>
+        </StackLayout>
+    </GridLayout>
 </Page>
