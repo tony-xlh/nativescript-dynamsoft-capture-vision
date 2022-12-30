@@ -1,5 +1,5 @@
-import { NativescriptDynamsoftCameraEnhancerCommon } from './common';
+import { DynamsoftCameraEnhancerCommon } from './common';
 
-export class NativescriptDynamsoftCameraEnhancer extends NativescriptDynamsoftCameraEnhancerCommon {
+export class DynamsoftCameraEnhancer extends DynamsoftCameraEnhancerCommon {
     
 }

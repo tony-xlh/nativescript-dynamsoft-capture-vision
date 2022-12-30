@@ -1,4 +1,4 @@
-import { Observable, EventData, Page } from '@nativescript/core';
+import { EventData, Page } from '@nativescript/core';
 import { DemoSharedNativescriptDynamsoftCameraEnhancer } from '@demo/shared';
 import { } from 'nativescript-dynamsoft-camera-enhancer';
 
@@ -8,5 +8,7 @@ export function navigatingTo(args: EventData) {
 }
 
 export class DemoModel extends DemoSharedNativescriptDynamsoftCameraEnhancer {
-	
+	get isActive(): boolean {
+		return true;
+	}
 }
