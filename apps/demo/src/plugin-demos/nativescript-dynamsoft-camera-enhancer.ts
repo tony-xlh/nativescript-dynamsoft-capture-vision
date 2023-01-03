@@ -13,7 +13,7 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftCameraEnhancer {
 	desiredCamera:string = "";
 
 	dce:DynamsoftCameraEnhancer;
-    cameras:string[]|undefined;
+	cameras:string[]|undefined;
 
 	dceLoaded(args: EventData) {
 		alert("loaded");
