@@ -9,7 +9,7 @@ export function navigatingTo(args: EventData) {
 
 export class DemoModel extends DemoSharedNativescriptDynamsoftCameraEnhancer {
 	isActive: boolean = true;
-	desiredTorchStatus:boolean = true;
+	desiredTorchStatus:boolean = false;
 	desiredCamera:string = "";
 
 	dce:DynamsoftCameraEnhancer;

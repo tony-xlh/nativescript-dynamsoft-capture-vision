@@ -8,11 +8,13 @@ export class DynamsoftBarcodeReader extends DynamsoftBarcodeReaderCommon {
   }
 
   initLicense(license:string){
+    console.log("init license: "+license);
     const listener = new com.dynamsoft.dbr.DBRLicenseVerificationListener();
-    listener.DBRLicenseVerificationCallback = function (isSuccessful, e) {
-      console.log(isSuccessful);
-    }
+    //listener.DBRLicenseVerificationCallback = function (isSuccessful, e) {
+    //  console.log(isSuccessful);
+    //}
     com.dynamsoft.dbr.BarcodeReader.initLicense(license,listener);
+    console.log("init license done");
   }
 
   decodeFrame(frame:any):TextResult[] {
