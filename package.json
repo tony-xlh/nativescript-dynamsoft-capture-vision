@@ -44,5 +44,12 @@
     "**/*.{js,ts,scss,json,html}": [
       "npx prettier --write"
     ]
+  },
+  "nativescript": {
+    "id": {
+        "ios": "com.xulihang.nativescript" ,
+        "android": "com.xulihang.nativescript"
+    }
   }
+  
 }

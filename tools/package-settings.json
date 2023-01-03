@@ -18,5 +18,11 @@
     "url": "https://github.com/tony-xlh/nativescript-dynamsoft-capture-vision//issues"
   },
   "license": "Apache-2.0",
-  "homepage": "https://github.com/tony-xlh/nativescript-dynamsoft-capture-vision/"
+  "homepage": "https://github.com/tony-xlh/nativescript-dynamsoft-capture-vision/",
+  "nativescript": {
+    "id": {
+        "ios": "com.xulihang.nativescript" ,
+        "android": "com.xulihang.nativescript"
+    }
+  }
 }

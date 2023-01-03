@@ -19,11 +19,11 @@ export class CameraEnhancer extends  CameraEnhancerCommon {
     
   }
 
-  captureFrame(){
+  captureFrame() {
     return this.dce.getFrameFromBuffer(true);
   }
 
-  getAllCameras():string[]{
+  getAllCameras():string[] {
     let array = [];
     let cameras = this.dce.getAllCameras();
     for (let index = 0; index < cameras.count; index++) {
@@ -33,7 +33,7 @@ export class CameraEnhancer extends  CameraEnhancerCommon {
     return array;
   }
 
-  getSelectedCamera():string{
+  getSelectedCamera():string {
     return this.dce.getSelectedCamera();
   }
 
@@ -46,7 +46,6 @@ export class CameraEnhancer extends  CameraEnhancerCommon {
   }
 
   [torchProperty.setNative](value: boolean) {
-    alert("torch property: "+value);
     if (value === true) {
       this.dce.turnOnTorch();
     }else{

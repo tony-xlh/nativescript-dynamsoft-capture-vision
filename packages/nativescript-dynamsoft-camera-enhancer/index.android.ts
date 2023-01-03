@@ -1,13 +1,18 @@
-import { Application,Utils } from '@nativescript/core';
+import { AndroidActivityBundleEventData, AndroidApplication, Application,Utils } from '@nativescript/core';
 import { activeProperty, cameraIDProperty, CameraEnhancerCommon, torchProperty } from './common';
 
 export class CameraEnhancer extends CameraEnhancerCommon {
   cameraView: com.dynamsoft.dce.DCECameraView;
   dce:com.dynamsoft.dce.CameraEnhancer;
-
+  cameraStatus:com.dynamsoft.dce.EnumCameraState;
   // @ts-ignore
   get android(): com.dynamsoft.dce.DCECameraView {
     return this.nativeView;
+  }
+
+  constructor(){
+    super();
+    this.registerLifeCycleEvents();
   }
 
   createNativeView() {
@@ -20,6 +25,30 @@ export class CameraEnhancer extends CameraEnhancerCommon {
 
   initNativeView() {
     
+  }
+
+  registerLifeCycleEvents(){
+    let pThis = this;
+    Application.android.on(AndroidApplication.activityPausedEvent, function (args: AndroidActivityBundleEventData) {
+      console.log("paused");
+      if (pThis.dce) {
+        pThis.cameraStatus = pThis.dce.getCameraState();
+        console.log("camera status: "+pThis.cameraStatus);
+        if (pThis.cameraStatus === com.dynamsoft.dce.EnumCameraState.OPENED) {
+          pThis.dce.close();
+        }
+      }
+    });
+
+    Application.android.on(AndroidApplication.activityResumedEvent, function (args: AndroidActivityBundleEventData) {
+      console.log("resumed");
+      if (pThis.dce && pThis.cameraStatus) {
+        console.log("camera status: "+pThis.cameraStatus);
+        if (pThis.cameraStatus === com.dynamsoft.dce.EnumCameraState.OPENED) {
+          pThis.dce.open();
+        }
+      }
+    });
   }
 
   captureFrame():com.dynamsoft.dce.DCEFrame{
@@ -49,7 +78,6 @@ export class CameraEnhancer extends CameraEnhancerCommon {
   }
 
   [torchProperty.setNative](value: boolean) {
-    alert("torch property: "+value);
     if (value === true) {
       this.dce.turnOnTorch();
     }else{
