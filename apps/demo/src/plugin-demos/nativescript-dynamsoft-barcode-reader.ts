@@ -27,7 +27,6 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 	}
 
 	dceLoaded(args: EventData) {
-		alert("loaded");
 		this.dce = <CameraEnhancer>args.object;
 	}
 
