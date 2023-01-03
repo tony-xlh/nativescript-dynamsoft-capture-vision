@@ -53,6 +53,7 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 
 	onDecodeFrame(args: EventData){
     let textResults:TextResult[] = this.dbr.decodeFrame(this.dce.captureFrame());
+		console.log(textResults);
 		let barcodes = "Found "+textResults.length+" barcodes.\n";
 		textResults.forEach(textResult => {
 			barcodes = barcodes + textResult.barcodeFormat + ": " + textResult.barcodeText + "\n";
