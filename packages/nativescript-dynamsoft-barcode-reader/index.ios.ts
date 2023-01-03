@@ -10,6 +10,7 @@ export class BarcodeReader extends BarcodeReaderCommon {
 
   initLicense(license:string) {
     console.log("init license: "+license);
+    DynamsoftBarcodeReader.initLicenseVerificationDelegate(license,null);
   }
 
   decodeFrame(frame:any):TextResult[] {
