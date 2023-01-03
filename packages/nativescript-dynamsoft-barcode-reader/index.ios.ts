@@ -30,21 +30,23 @@ export class BarcodeReader extends BarcodeReaderCommon {
 
   wrapResult(results:NSArray<iTextResult>):TextResult[] {
     let textResults:TextResult[] = [];
-    for (let index = 0; index < results.count; index++) {
-      const result = results[index];
-      let textResult:TextResult = {
-        barcodeText:result.barcodeText,
-        barcodeFormat:result.barcodeFormatString,
-        x1:result.localizationResult.resultPoints[0].x,
-        x2:result.localizationResult.resultPoints[1].x,
-        x3:result.localizationResult.resultPoints[2].x,
-        x4:result.localizationResult.resultPoints[3].x,
-        y1:result.localizationResult.resultPoints[0].y,
-        y2:result.localizationResult.resultPoints[1].y,
-        y3:result.localizationResult.resultPoints[2].y,
-        y4:result.localizationResult.resultPoints[3].y
+    if (results) {
+      for (let index = 0; index < results.count; index++) {
+        const result = results[index];
+        let textResult:TextResult = {
+          barcodeText:result.barcodeText,
+          barcodeFormat:result.barcodeFormatString,
+          x1:result.localizationResult.resultPoints[0].x,
+          x2:result.localizationResult.resultPoints[1].x,
+          x3:result.localizationResult.resultPoints[2].x,
+          x4:result.localizationResult.resultPoints[3].x,
+          y1:result.localizationResult.resultPoints[0].y,
+          y2:result.localizationResult.resultPoints[1].y,
+          y3:result.localizationResult.resultPoints[2].y,
+          y4:result.localizationResult.resultPoints[3].y
+        }
+        textResults.push(textResult);
       }
-      textResults.push(textResult);
     }
     return textResults;
   }
