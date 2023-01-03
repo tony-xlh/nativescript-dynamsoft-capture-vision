@@ -21,7 +21,6 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 	constructor(){
 		super();
     this.dbr = new DynamsoftBarcodeReader();
-		//this.initLicense();
 	}
 
 	initLicense(){
@@ -34,19 +33,18 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 	}
 
 	onSwitchCamera(args: EventData) {
-		alert("switch camera");
 		if (this.dce) {
 			if (!this.cameras) {
-                this.cameras = this.dce.getAllCameras();
+				this.cameras = this.dce.getAllCameras();
 			}
-            const selectedCamera = this.dce.getSelectedCamera();
+			const selectedCamera = this.dce.getSelectedCamera();
 			let nextIndex = this.cameras.indexOf(selectedCamera) + 1;
 			if (nextIndex >= this.cameras.length) {
 				nextIndex = 0;
 			}
 			const nextCamera = this.cameras[nextIndex];
 			if (nextCamera != selectedCamera) {
-                this.set("desiredCamera",nextCamera);
+				this.set("desiredCamera",nextCamera);
 			}
 		}
 	}
@@ -57,6 +55,14 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 
 	onDecodeFrame(args: EventData){
     let textResults:TextResult[] = this.dbr.decodeFrame(this.dce.captureFrame());
-		alert("Found "+textResults.length+" barcodes.");
+		let barcodes = "Found "+textResults.length+" barcodes.\n";
+		textResults.forEach(textResult => {
+			barcodes = barcodes + textResult.barcodeFormat + ": " + textResult.barcodeText + "\n";
+		});
+		alert(barcodes);
+	}
+
+	onInitLicense(args:EventData) {
+		this.initLicense();
 	}
 }
