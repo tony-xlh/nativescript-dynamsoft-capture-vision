@@ -1,6 +1,6 @@
 import { EventData, Page } from '@nativescript/core';
 import { DemoSharedNativescriptDynamsoftCameraEnhancer } from '@demo/shared';
-import { DynamsoftCameraEnhancer } from 'nativescript-dynamsoft-camera-enhancer';
+import { CameraEnhancer } from 'nativescript-dynamsoft-camera-enhancer';
 
 export function navigatingTo(args: EventData) {
 	const page = <Page>args.object;
@@ -12,12 +12,12 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftCameraEnhancer {
 	desiredTorchStatus:boolean = false;
 	desiredCamera:string = "";
 
-	dce:DynamsoftCameraEnhancer;
+	dce:CameraEnhancer;
 	cameras:string[]|undefined;
 
 	dceLoaded(args: EventData) {
 		alert("loaded");
-		this.dce = <DynamsoftCameraEnhancer>args.object;
+		this.dce = <CameraEnhancer>args.object;
 	}
 
 	onSwitchCamera(args: EventData) {

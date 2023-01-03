@@ -1,5 +1,5 @@
-import { DynamsoftBarcodeReaderCommon } from './common';
+import { BarcodeReaderCommon } from './common';
 
-export class DynamsoftBarcodeReader extends DynamsoftBarcodeReaderCommon {
+export class BarcodeReader extends BarcodeReaderCommon {
     
 }

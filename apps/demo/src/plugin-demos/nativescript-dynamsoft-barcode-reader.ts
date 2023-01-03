@@ -1,8 +1,7 @@
 import { Observable, EventData, Page } from '@nativescript/core';
 import { DemoSharedNativescriptDynamsoftBarcodeReader } from '@demo/shared';
-import { DynamsoftBarcodeReader } from 'nativescript-dynamsoft-barcode-reader';
-import { DynamsoftCameraEnhancer } from '@xulihang/nativescript-dynamsoft-camera-enhancer';
-import { TextResult } from '@xulihang/nativescript-dynamsoft-barcode-reader/common';
+import { BarcodeReader,TextResult } from 'nativescript-dynamsoft-barcode-reader';
+import { CameraEnhancer } from 'nativescript-dynamsoft-camera-enhancer';
 
 export function navigatingTo(args: EventData) {
 	const page = <Page>args.object;
@@ -14,13 +13,13 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 	desiredTorchStatus:boolean = false;
 	desiredCamera:string = "";
 
-	dce:DynamsoftCameraEnhancer;
-	dbr:DynamsoftBarcodeReader;
+	dce:BarcodeReader;
+	dbr:CameraEnhancer;
 	cameras:string[]|undefined;
 
 	constructor(){
 		super();
-    this.dbr = new DynamsoftBarcodeReader();
+    this.dbr = new BarcodeReader();
 	}
 
 	initLicense(){
@@ -29,7 +28,7 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 
 	dceLoaded(args: EventData) {
 		alert("loaded");
-		this.dce = <DynamsoftCameraEnhancer>args.object;
+		this.dce = <CameraEnhancer>args.object;
 	}
 
 	onSwitchCamera(args: EventData) {

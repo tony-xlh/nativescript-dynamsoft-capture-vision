@@ -1,10 +1,10 @@
-import { DynamsoftBarcodeReaderCommon, TextResult } from './common';
+import { BarcodeReaderCommon, TextResult } from './common';
 
 interface LicenseVerificationListener {
   new(): com.dynamsoft.dbr.DBRLicenseVerificationListener
 }
 
-export class DynamsoftBarcodeReader extends DynamsoftBarcodeReaderCommon {
+export class BarcodeReader extends BarcodeReaderCommon {
   dbr:com.dynamsoft.dbr.BarcodeReader;
   LicenseVerificationListener: LicenseVerificationListener;
   constructor(){

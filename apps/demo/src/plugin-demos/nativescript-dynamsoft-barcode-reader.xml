@@ -2,12 +2,12 @@
     xmlns:dce="nativescript-dynamsoft-camera-enhancer"
     navigatingTo="navigatingTo" class="page">
     <GridLayout rows="*, auto, auto">
-        <dce:DynamsoftCameraEnhancer 
+        <dce:CameraEnhancer 
         loaded="{{ dceLoaded }}" 
         rowSpan="3" 
         active="{{ isActive }}"
         cameraID="{{ desiredCamera }}"
-        torch="{{ desiredTorchStatus }}"></dce:DynamsoftCameraEnhancer>
+        torch="{{ desiredTorchStatus }}"></dce:CameraEnhancer>
         <StackLayout row="1">
             <Button text="Init License" tap="{{ onInitLicense }}"></Button>
             <Button text="Switch Torch" tap="{{ onSwitchTorch }}"></Button>

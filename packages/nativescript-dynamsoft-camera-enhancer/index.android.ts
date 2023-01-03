@@ -1,7 +1,7 @@
 import { Application,Utils } from '@nativescript/core';
-import { activeProperty, cameraIDProperty, DynamsoftCameraEnhancerCommon, torchProperty } from './common';
+import { activeProperty, cameraIDProperty, CameraEnhancerCommon, torchProperty } from './common';
 
-export class DynamsoftCameraEnhancer extends DynamsoftCameraEnhancerCommon {
+export class CameraEnhancer extends CameraEnhancerCommon {
   cameraView: com.dynamsoft.dce.DCECameraView;
   dce:com.dynamsoft.dce.CameraEnhancer;
 

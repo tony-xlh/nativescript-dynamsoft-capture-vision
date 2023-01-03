@@ -1,6 +1,6 @@
-import { DynamsoftCameraEnhancerCommon } from './common';
+import { CameraEnhancerCommon } from './common';
 
-export declare class DynamsoftCameraEnhancer extends DynamsoftCameraEnhancerCommon {
+export declare class CameraEnhancer extends CameraEnhancerCommon {
     captureFrame(): any;
     getAllCameras(): string[];
     getSelectedCamera(): string;

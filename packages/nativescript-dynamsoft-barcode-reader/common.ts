@@ -13,6 +13,6 @@ export interface TextResult {
   y4:number;
 }
 
-export class DynamsoftBarcodeReaderCommon extends Observable {
-  
+export class BarcodeReaderCommon extends Observable {
+
 }
