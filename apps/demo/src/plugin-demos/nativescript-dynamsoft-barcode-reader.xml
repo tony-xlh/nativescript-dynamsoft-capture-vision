@@ -13,6 +13,7 @@
             <Button text="Switch Torch" tap="{{ onSwitchTorch }}"></Button>
             <Button text="Switch Camera" tap="{{ onSwitchCamera }}"></Button>
             <Button text="Decode Frame" tap="{{ onDecodeFrame }}"></Button>
+            <Button text="Toggle Live Detection" tap="{{ onToggleLiveDetection }}"></Button>
         </StackLayout>
     </GridLayout>
 </Page>

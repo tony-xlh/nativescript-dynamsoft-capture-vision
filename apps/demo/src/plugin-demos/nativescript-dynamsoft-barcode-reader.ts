@@ -17,6 +17,10 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 	dbr:BarcodeReader;
 	cameras:string[]|undefined;
 
+	interval:any;
+	liveOn:boolean = false;
+	decoding:boolean = false;
+
 	constructor(){
 		super();
     this.dbr = new BarcodeReader();
@@ -64,4 +68,32 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 	onInitLicense(args:EventData) {
 		this.initLicense();
 	}
+
+	onToggleLiveDetection(args:EventData) {
+    if (this.liveOn === false) {
+			this.liveOn = true;
+			this.decoding = false;
+			console.log("set interval");
+			const detecting = async () => {
+				if (this.decoding === true) {
+					console.log("is decoding");
+					return;
+				}
+				console.log("start detecting");
+				this.decoding = true;
+				let textResults:TextResult[] = await this.dbr.decodeFrameAsync(this.dce.captureFrame());
+				this.decoding = false;
+				console.log(textResults);
+			}
+			this.interval = setInterval(detecting,200);
+		}else{
+			this.liveOn = false;
+			console.log("clear interval");
+			if (this.interval) {
+				clearInterval(this.interval);
+			}
+		}
+	}
+
+
 }
