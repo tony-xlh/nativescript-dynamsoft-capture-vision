@@ -51,8 +51,8 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 		this.set("desiredTorchStatus",!this.desiredTorchStatus);
 	}
 
-	onDecodeFrame(args: EventData){
-    let textResults:TextResult[] = this.dbr.decodeFrame(this.dce.captureFrame());
+	async onDecodeFrame(args: EventData){
+    let textResults:TextResult[] = await this.dbr.decodeFrameAsync(this.dce.captureFrame());
 		console.log(textResults);
 		let barcodes = "Found "+textResults.length+" barcodes.\n";
 		textResults.forEach(textResult => {

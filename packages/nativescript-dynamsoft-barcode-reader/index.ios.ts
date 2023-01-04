@@ -13,6 +13,14 @@ export class BarcodeReader extends BarcodeReaderCommon {
     DynamsoftBarcodeReader.initLicenseVerificationDelegate(license,null);
   }
 
+  decodeFrameAsync(frame:any):Promise<TextResult[]> {
+    let pThis = this;
+    return new Promise(function (resolve, reject) {
+      let result = pThis.decodeFrame(frame)
+      resolve(result);
+    });
+  }
+
   decodeFrame(frame:any):TextResult[] {
     let results = this.dbr.decodeBufferWithWidthHeightStrideFormatError(frame.imageData,frame.width,frame.height, frame.stride, frame.pixelFormat);
     return this.wrapResult(results);

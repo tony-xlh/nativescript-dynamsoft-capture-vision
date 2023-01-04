@@ -40,6 +40,14 @@ export class BarcodeReader extends BarcodeReaderCommon {
     console.log("init license done");
   }
 
+  decodeFrameAsync(frame:any):Promise<TextResult[]> {
+    let pThis = this;
+    return new Promise(function (resolve, reject) {
+      let result = pThis.decodeFrame(frame)
+      resolve(result);
+    });
+  }
+
   decodeFrame(frame:any):TextResult[] {
     let results = this.dbr.decodeBuffer(frame.getImageData(),frame.getWidth(),frame.getHeight(), frame.getStrides()[0], frame.getPixelFormat());
     return this.wrapResult(results);
