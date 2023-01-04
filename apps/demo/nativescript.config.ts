@@ -1,7 +1,8 @@
 import { NativeScriptConfig } from '@nativescript/core';
-
+//org.nativescript.plugindemo
+//com.xulihang.nativescript
 export default {
-	id: 'com.xulihang.nativescript',
+	id: 'org.nativescript.plugindemo',
 	appResourcesPath: '../../tools/assets/App_Resources',
 	android: {
 		v8Flags: '--expose_gc',

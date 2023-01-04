@@ -13,13 +13,22 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 	desiredTorchStatus:boolean = false;
 	desiredCamera:string = "";
 
-	dce:BarcodeReader;
-	dbr:CameraEnhancer;
+	dce:CameraEnhancer;
+	dbr:BarcodeReader;
 	cameras:string[]|undefined;
-
+	worker:Worker;
 	constructor(){
 		super();
     this.dbr = new BarcodeReader();
+		this.worker = new Worker("./workers/barcodeReader.js");
+		this.worker.onmessage = function(msg) {
+			console.log("on message");
+			console.log(msg);
+		}
+		this.worker.onerror = function(err) {
+			console.log(`An unhandled error occurred in worker: ${err.filename}, line: ${err.lineno} :`);
+			console.log(err.message);
+		}
 	}
 
 	initLicense(){
@@ -52,14 +61,11 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 	}
 
 	onDecodeFrame(args: EventData){
-    let textResults:TextResult[] = this.dbr.decodeFrame(this.dce.captureFrame());
-		console.log(textResults);
-		let barcodes = "Found "+textResults.length+" barcodes.\n";
-		textResults.forEach(textResult => {
-			barcodes = barcodes + textResult.barcodeFormat + ": " + textResult.barcodeText + "\n";
-		});
-		alert(barcodes);
+		const frame = this.dce.captureFrame();
+		this.worker.postMessage({ info:"asd",frame: frame, dbr: this.dbr });
 	}
+
+
 
 	onInitLicense(args:EventData) {
 		this.initLicense();
