@@ -23,6 +23,12 @@ export class CameraEnhancer extends  CameraEnhancerCommon {
     return this.dce.getFrameFromBuffer(true);
   }
 
+  captureFrameAsBase64() {
+    let frame = this.dce.getFrameFromBuffer(true);
+    let image = frame.toUIImage();
+    return this.UIImage2Base64(image);
+  }
+
   getAllCameras():string[] {
     let array = [];
     let cameras = this.dce.getAllCameras();
@@ -35,6 +41,11 @@ export class CameraEnhancer extends  CameraEnhancerCommon {
 
   getSelectedCamera():string {
     return this.dce.getSelectedCamera();
+  }
+
+  UIImage2Base64(image:UIImage):string{
+    let data = UIImageJPEGRepresentation(image,100);
+    return data.base64Encoding();
   }
 
   [activeProperty.setNative](value: boolean) {

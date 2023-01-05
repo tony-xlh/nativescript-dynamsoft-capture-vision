@@ -55,6 +55,12 @@ export class CameraEnhancer extends CameraEnhancerCommon {
     return this.dce.getFrameFromBuffer(true);
   }
 
+  captureFrameAsBase64():string{
+    let frame = this.dce.getFrameFromBuffer(true);
+    let bitmap = frame.toBitmap();
+    return this.bitmap2Base64(bitmap);
+  }
+
   getAllCameras():string[]{
     let array = [];
     let cameras = this.dce.getAllCameras();
@@ -67,6 +73,12 @@ export class CameraEnhancer extends CameraEnhancerCommon {
 
   getSelectedCamera():string{
     return this.dce.getSelectedCamera();
+  }
+
+  bitmap2Base64(bitmap:android.graphics.Bitmap):string{
+    let outputStream = new java.io.ByteArrayOutputStream();
+    bitmap.compress(android.graphics.Bitmap.CompressFormat.JPEG, 100, outputStream);
+    return android.util.Base64.encodeToString(outputStream.toByteArray(), android.util.Base64.DEFAULT);
   }
 
   [activeProperty.setNative](value: boolean) {
