@@ -1,5 +1,4 @@
 import { BarcodeReaderCommon, TextResult } from './common';
-import {ImageSource, fromFile, fromResource, fromBase64} from "image-source";
 
 export class BarcodeReader extends BarcodeReaderCommon {
   dbr:DynamsoftBarcodeReader;
