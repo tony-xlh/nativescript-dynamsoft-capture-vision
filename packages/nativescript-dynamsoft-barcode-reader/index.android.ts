@@ -1,5 +1,29 @@
 import { BarcodeReaderCommon, TextResult } from './common';
 
+@NativeClass
+class ScanHandler {
+  onScanned(results:androidNative.Array<com.dynamsoft.dbr.TextResult>) {}
+}
+
+@NativeClass
+class DecodingRunnable extends java.lang.Runnable {
+  dbr:com.dynamsoft.dbr.BarcodeReader;
+  frame:any;
+  handler:ScanHandler;
+  constructor(reader:com.dynamsoft.dbr.BarcodeReader,frame:any,handler:ScanHandler){
+    super();
+    this.dbr = reader;
+    this.frame = frame;
+    this.handler = handler;
+    return global.__native(this);
+  }
+
+  run() {
+    let results = this.dbr.decodeBuffer(this.frame.getImageData(),this.frame.getWidth(),this.frame.getHeight(), this.frame.getStrides()[0], this.frame.getPixelFormat());
+    this.handler.onScanned(results);
+  }
+}
+
 export class BarcodeReader extends BarcodeReaderCommon {
   dbr:com.dynamsoft.dbr.BarcodeReader;
   constructor(){
@@ -16,8 +40,12 @@ export class BarcodeReader extends BarcodeReaderCommon {
   decodeFrameAsync(frame:any):Promise<TextResult[]> {
     let pThis = this;
     return new Promise(function (resolve, reject) {
-      let result = pThis.decodeFrame(frame)
-      resolve(result);
+      let handler:ScanHandler = new ScanHandler();
+      handler.onScanned = function (results) {
+        resolve(pThis.wrapResult(results));
+      }
+      let decodingThread = new java.lang.Thread(new DecodingRunnable(pThis.dbr,frame,handler));
+      decodingThread.start();
     });
   }
 
