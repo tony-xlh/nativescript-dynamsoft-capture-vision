@@ -9,9 +9,9 @@
         cameraID="{{ desiredCamera }}"
         torch="{{ desiredTorchStatus }}"></dce:CameraEnhancer>
         <StackLayout row="1">
-            <Button class="my-button" text="Switch Torch" tap="{{ onSwitchTorch }}"></Button>
-            <Button class="my-button" text="Switch Camera" tap="{{ onSwitchCamera }}"></Button>
-            <Button class="my-button" text="Capture Frame" tap="{{ onCaptureFrame }}"></Button>
+            <Button class="btn btn-primary" text="Switch Torch" tap="{{ onSwitchTorch }}"></Button>
+            <Button class="btn btn-primary" text="Switch Camera" tap="{{ onSwitchCamera }}"></Button>
+            <Button class="btn btn-primary" text="Capture Frame" tap="{{ onCaptureFrame }}"></Button>
         </StackLayout>
     </GridLayout>
 </Page>

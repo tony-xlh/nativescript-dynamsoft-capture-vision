@@ -10,11 +10,11 @@
         torch="{{ desiredTorchStatus }}"></dce:CameraEnhancer>
         <Label rowSpan="3" text="{{ barcodeText }}" textWrap="true"/>
         <StackLayout row="1">
-            <Button class="my-button" text="Init License" tap="{{ onInitLicense }}"></Button>
-            <Button class="my-button" text="Switch Torch" tap="{{ onSwitchTorch }}"></Button>
-            <Button class="my-button" text="Switch Camera" tap="{{ onSwitchCamera }}"></Button>
-            <Button class="my-button" text="Decode Frame" tap="{{ onDecodeFrame }}"></Button>
-            <Button class="my-button" text="{{ liveButtonText }}" tap="{{ onToggleLiveDetection }}"></Button>
+            <Button class="btn btn-primary" text="Init License" tap="{{ onInitLicense }}"></Button>
+            <Button class="btn btn-primary" text="Switch Torch" tap="{{ onSwitchTorch }}"></Button>
+            <Button class="btn btn-primary" text="Switch Camera" tap="{{ onSwitchCamera }}"></Button>
+            <Button class="btn btn-primary" text="Decode Frame" tap="{{ onDecodeFrame }}"></Button>
+            <Button class="btn btn-primary" text="{{ liveButtonText }}" tap="{{ onToggleLiveDetection }}"></Button>
         </StackLayout>
     </GridLayout>
 </Page>
