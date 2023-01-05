@@ -22,7 +22,7 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 	liveOn:boolean = false;
 	decoding:boolean = false;
 	liveButtonText:string = "Turn on Live Detection";
-
+	barcodeText:string = "";
 	constructor(){
 		super();
     this.dbr = new BarcodeReader();
@@ -86,9 +86,16 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 				console.log("start detecting");
 				this.decoding = true;
 				let frame = this.dce.captureFrame();
-				let textResults:TextResult[] = await this.dbr.decodeFrameAsync(frame);
+				if (frame) {
+					let textResults:TextResult[] = await this.dbr.decodeFrameAsync(frame);
+					let barcodes = "Found "+textResults.length+" barcodes.\n";
+					textResults.forEach(textResult => {
+						barcodes = barcodes + textResult.barcodeFormat + ": " + textResult.barcodeText + "\n";
+					});
+					this.set("barcodeText",barcodes);
+					console.log(textResults);
+				}
 				this.decoding = false;
-				console.log(textResults);
 			}
 			this.interval = setInterval(detecting,200);
 		}else{
