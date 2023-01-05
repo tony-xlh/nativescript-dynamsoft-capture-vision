@@ -1,6 +1,7 @@
 import { EventData, Page } from '@nativescript/core';
 import { DemoSharedNativescriptDynamsoftCameraEnhancer } from '@demo/shared';
 import { CameraEnhancer } from 'nativescript-dynamsoft-camera-enhancer';
+import "./styles.css";
 
 export function navigatingTo(args: EventData) {
 	const page = <Page>args.object;

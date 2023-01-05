@@ -1,0 +1,10 @@
+
+.my-button {
+  background-color: whitesmoke;
+  color: black;
+}
+
+.my-button:active {
+  background-color: whitesmoke;
+  color: lightseagreen;
+}

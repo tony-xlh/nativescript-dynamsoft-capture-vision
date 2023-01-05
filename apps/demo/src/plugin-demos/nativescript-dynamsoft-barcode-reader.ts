@@ -2,6 +2,7 @@ import { Observable, EventData, Page } from '@nativescript/core';
 import { DemoSharedNativescriptDynamsoftBarcodeReader } from '@demo/shared';
 import { BarcodeReader,TextResult } from 'nativescript-dynamsoft-barcode-reader';
 import { CameraEnhancer } from 'nativescript-dynamsoft-camera-enhancer';
+import "./styles.css";
 
 export function navigatingTo(args: EventData) {
 	const page = <Page>args.object;
@@ -20,6 +21,7 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 	interval:any;
 	liveOn:boolean = false;
 	decoding:boolean = false;
+	liveButtonText:string = "Turn on Live Detection";
 
 	constructor(){
 		super();
@@ -73,6 +75,7 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 	onToggleLiveDetection(args:EventData) {
     if (this.liveOn === false) {
 			this.liveOn = true;
+			this.set("liveButtonText","Turn off Live Detection");
 			this.decoding = false;
 			console.log("set interval");
 			const detecting = async () => {
@@ -90,6 +93,7 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 			this.interval = setInterval(detecting,200);
 		}else{
 			this.liveOn = false;
+			this.set("liveButtonText","Turn on Live Detection");
 			console.log("clear interval");
 			if (this.interval) {
 				clearInterval(this.interval);
