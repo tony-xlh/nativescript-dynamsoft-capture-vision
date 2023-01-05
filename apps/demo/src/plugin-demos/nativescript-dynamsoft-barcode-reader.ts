@@ -38,6 +38,9 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 
 	onSwitchCamera(args: EventData) {
 		if (this.dce) {
+			if (this.liveOn) {
+				this.toggleLiveDetection();
+			}
 			if (!this.cameras) {
 				this.cameras = this.dce.getAllCameras();
 			}
@@ -73,7 +76,11 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 	}
 
 	onToggleLiveDetection(args:EventData) {
-    if (this.liveOn === false) {
+    this.toggleLiveDetection();
+	}
+
+	toggleLiveDetection(){
+		if (this.liveOn === false) {
 			this.liveOn = true;
 			this.set("liveButtonText","Turn off Live Detection");
 			this.decoding = false;
@@ -107,6 +114,5 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 			}
 		}
 	}
-
 
 }
