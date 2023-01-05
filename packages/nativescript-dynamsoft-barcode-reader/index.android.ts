@@ -1,41 +1,14 @@
 import { BarcodeReaderCommon, TextResult } from './common';
 
-interface LicenseVerificationListener {
-  new(): com.dynamsoft.dbr.DBRLicenseVerificationListener
-}
-
 export class BarcodeReader extends BarcodeReaderCommon {
   dbr:com.dynamsoft.dbr.BarcodeReader;
-  LicenseVerificationListener: LicenseVerificationListener;
   constructor(){
     super();
     this.dbr = new com.dynamsoft.dbr.BarcodeReader();
-    this.initializeLicenseVerificationListener();
-  }
-
-  initializeLicenseVerificationListener(){
-    if (this.LicenseVerificationListener) {
-      return;
-    }
-    @Interfaces([com.dynamsoft.dbr.DBRLicenseVerificationListener])
-    class LicenseVerificationListenerImpl extends java.lang.Object implements com.dynamsoft.dbr.DBRLicenseVerificationListener {
-        constructor() {
-          super();
-          // necessary when extending TypeScript constructors
-          return global.__native(this);
-        }
-
-        DBRLicenseVerificationCallback(isSuccessful:boolean,e:java.lang.Exception): void {
-          console.log(isSuccessful);
-          console.log(e.getLocalizedMessage());
-        }
-    }
-    this.LicenseVerificationListener = LicenseVerificationListenerImpl;
   }
 
   initLicense(license:string) {
     console.log("init license: "+license);
-    //let listener = new this.LicenseVerificationListener();
     com.dynamsoft.dbr.BarcodeReader.initLicense(license,null);
     console.log("init license done");
   }
