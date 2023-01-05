@@ -100,7 +100,7 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 						barcodes = barcodes + textResult.barcodeFormat + ": " + textResult.barcodeText + "\n";
 					});
 					this.set("barcodeText",barcodes);
-					console.log(textResults);
+					console.log(barcodes);
 				}
 				this.decoding = false;
 			}
