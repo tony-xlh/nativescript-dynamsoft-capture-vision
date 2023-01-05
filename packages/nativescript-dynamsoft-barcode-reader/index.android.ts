@@ -32,9 +32,11 @@ export class BarcodeReader extends BarcodeReaderCommon {
   }
 
   initLicense(license:string) {
-    console.log("init license: "+license);
-    com.dynamsoft.dbr.BarcodeReader.initLicense(license,null);
-    console.log("init license done");
+    com.dynamsoft.dbr.BarcodeReader.initLicense(license,new com.dynamsoft.dbr.DBRLicenseVerificationListener({
+        DBRLicenseVerificationCallback: function(isSuccessful:boolean,exception:java.lang.Exception){
+          console.log("license initialization: "+isSuccessful);
+        }
+    }));
   }
 
   decodeFrameAsync(frame:any):Promise<TextResult[]> {
