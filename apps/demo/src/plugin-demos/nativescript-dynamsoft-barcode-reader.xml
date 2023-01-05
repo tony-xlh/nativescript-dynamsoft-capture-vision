@@ -8,7 +8,7 @@
         active="{{ isActive }}"
         cameraID="{{ desiredCamera }}"
         torch="{{ desiredTorchStatus }}"></dce:CameraEnhancer>
-        <Label rowSpan="3" text="{{ barcodeText }}" textWrap="true"/>
+        <Label rowSpan="3" textAlignment="center" text="{{ barcodeText }}" textWrap="true"/>
         <StackLayout row="1">
             <Button class="btn btn-primary" text="Init License" tap="{{ onInitLicense }}"></Button>
             <Button class="btn btn-primary" text="Switch Torch" tap="{{ onSwitchTorch }}"></Button>
