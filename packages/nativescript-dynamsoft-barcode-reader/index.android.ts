@@ -19,6 +19,7 @@ class DecodingRunnable extends java.lang.Runnable {
   }
 
   run() {
+    console.log("run decode");
     let results = this.dbr.decodeBuffer(this.frame.getImageData(),this.frame.getWidth(),this.frame.getHeight(), this.frame.getStrides()[0], this.frame.getPixelFormat());
     this.handler.onScanned(results);
   }
@@ -46,7 +47,8 @@ export class BarcodeReader extends BarcodeReaderCommon {
       handler.onScanned = function (results) {
         resolve(pThis.wrapResult(results));
       }
-      let decodingThread = new java.lang.Thread(new DecodingRunnable(pThis.dbr,frame,handler));
+      let runnable = new DecodingRunnable(pThis.dbr,frame,handler);
+      let decodingThread = new java.lang.Thread(runnable);
       decodingThread.start();
     });
   }

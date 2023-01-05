@@ -56,7 +56,8 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 	}
 
 	async onDecodeFrame(args: EventData){
-    let textResults:TextResult[] = await this.dbr.decodeFrameAsync(this.dce.captureFrame());
+		let frame = this.dce.captureFrame();
+    let textResults:TextResult[] = await this.dbr.decodeFrameAsync(frame);
 		console.log(textResults);
 		let barcodes = "Found "+textResults.length+" barcodes.\n";
 		textResults.forEach(textResult => {
@@ -81,7 +82,8 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 				}
 				console.log("start detecting");
 				this.decoding = true;
-				let textResults:TextResult[] = await this.dbr.decodeFrameAsync(this.dce.captureFrame());
+				let frame = this.dce.captureFrame();
+				let textResults:TextResult[] = await this.dbr.decodeFrameAsync(frame);
 				this.decoding = false;
 				console.log(textResults);
 			}

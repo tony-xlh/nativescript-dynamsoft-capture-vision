@@ -23,6 +23,13 @@ export class CameraEnhancer extends  CameraEnhancerCommon {
     return this.dce.getFrameFromBuffer(true);
   }
 
+  captureFrameAsync() {
+    let pThis = this;
+    return new Promise(function (resolve, reject) {
+      resolve(pThis.dce.getFrameFromBuffer(true));
+    });
+  }
+
   captureFrameAsBase64() {
     let frame = this.dce.getFrameFromBuffer(true);
     let image = frame.toUIImage();
