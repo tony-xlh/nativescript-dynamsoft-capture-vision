@@ -1,4 +1,5 @@
 import { BarcodeReaderCommon, TextResult } from './common';
+import {ImageSource, fromFile, fromResource, fromBase64} from "image-source";
 
 export class BarcodeReader extends BarcodeReaderCommon {
   dbr:DynamsoftBarcodeReader;
@@ -36,6 +37,11 @@ export class BarcodeReader extends BarcodeReaderCommon {
     return this.wrapResult(results);
   }
 
+  decodeBase64(base64:string):TextResult[] {
+    let image = this.base642UIImage(base64);
+    return this.decodeBitmap(image);
+  }
+
   wrapResult(results:NSArray<iTextResult>):TextResult[] {
     let textResults:TextResult[] = [];
     if (results) {
@@ -57,5 +63,11 @@ export class BarcodeReader extends BarcodeReaderCommon {
       }
     }
     return textResults;
+  }
+
+  base642UIImage(base64:string):UIImage{
+    let data = NSData.alloc().initWithBase64EncodedStringOptions(base64,NSDataBase64DecodingOptions.IgnoreUnknownCharacters);
+    let image = UIImage.alloc().initWithData(data);
+    return image;
   }
 }

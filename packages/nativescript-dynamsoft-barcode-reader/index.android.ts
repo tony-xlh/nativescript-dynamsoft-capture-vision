@@ -66,6 +66,11 @@ export class BarcodeReader extends BarcodeReaderCommon {
     return this.wrapResult(results);
   }
 
+  decodeBase64(base64:string):TextResult[] {
+    let bitmap = this.base642Bitmap(base64);
+    return this.decodeBitmap(bitmap);
+  }
+
   wrapResult(results:androidNative.Array<com.dynamsoft.dbr.TextResult>):TextResult[] {
     let textResults:TextResult[] = [];
     for (let index = 0; index < results.length; index++) {
@@ -85,5 +90,10 @@ export class BarcodeReader extends BarcodeReaderCommon {
       textResults.push(textResult);
     }
     return textResults;
+  }
+
+  base642Bitmap(base64:string):android.graphics.Bitmap {
+    let decode = android.util.Base64.decode(base64,android.util.Base64.DEFAULT);
+    return android.graphics.BitmapFactory.decodeByteArray(decode,0,decode.length);
   }
 }
