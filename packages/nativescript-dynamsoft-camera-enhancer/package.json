@@ -19,7 +19,9 @@
     "JavaScript",
     "TypeScript",
     "iOS",
-    "Android"
+    "Android",
+    "Dynamsoft",
+    "camera"
   ],
   "author": {
     "name": "Lihang Xu",
