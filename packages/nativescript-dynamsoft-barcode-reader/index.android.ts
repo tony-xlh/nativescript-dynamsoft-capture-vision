@@ -98,4 +98,8 @@ export class BarcodeReader extends BarcodeReaderCommon {
     let decode = android.util.Base64.decode(base64,android.util.Base64.DEFAULT);
     return android.graphics.BitmapFactory.decodeByteArray(decode,0,decode.length);
   }
+
+  setCameraEnhancer(dce:any) {
+    this.dbr.setCameraEnhancer(dce);
+  }
 }

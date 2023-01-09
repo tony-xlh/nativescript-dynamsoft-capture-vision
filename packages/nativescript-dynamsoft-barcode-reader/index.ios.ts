@@ -69,4 +69,8 @@ export class BarcodeReader extends BarcodeReaderCommon {
     let image = UIImage.alloc().initWithData(data);
     return image;
   }
+
+  setCameraEnhancer(dce:any) {
+    this.dbr.setCameraEnhancer(dce);
+  }
 }
