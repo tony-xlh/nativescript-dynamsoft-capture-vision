@@ -23,6 +23,7 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 	decoding:boolean = false;
 	liveButtonText:string = "Turn on Live Detection";
 	barcodeText:string = "";
+	barcodes:TextResult[] = [];
 	constructor(){
 		super();
     this.dbr = new BarcodeReader();
@@ -40,14 +41,8 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 		this.dbr.setCameraEnhancer(this.dce.getCameraEnhancer());
 		let pThis = this;
 		this.dbr.setTextResultListener(function (textResults:TextResult[]) {
-			let barcodes = "Found "+textResults.length+" barcodes.\n";
-			textResults.forEach(textResult => {
-				barcodes = barcodes + textResult.barcodeFormat + ": " + textResult.barcodeText + "\n";
-			});
-			setTimeout(function(){
-				pThis.set("barcodeText",barcodes);
-			}, 0);
-			console.log(barcodes);
+			pThis.barcodes = textResults;
+			console.log(pThis.barcodes);
 		})
 	}
 
@@ -99,10 +94,24 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 			this.liveOn = true;
 			this.set("liveButtonText","Turn off Live Detection");
 			this.dbr.startScanning();
+			const rerender = async () => {
+				console.log("rerender");
+				let barcodes = "Found "+this.barcodes.length+" barcodes.\n";
+				this.barcodes.forEach(textResult => {
+					barcodes = barcodes + textResult.barcodeFormat + ": " + textResult.barcodeText + "\n";
+				});
+				this.set("barcodeText",barcodes);
+			}
+			console.log("set interval");
+			this.interval = setInterval(rerender,200);
 		}else{
 			this.liveOn = false;
 			this.set("liveButtonText","Turn on Live Detection");
 			this.dbr.stopScanning();
+			if (this.interval) {
+				console.log("clear interval");
+				clearInterval(this.interval);
+			}
 		}
 	}
 
