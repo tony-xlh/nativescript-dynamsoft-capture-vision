@@ -14,6 +14,9 @@ class LicenseListenerImpl
     
     DBRLicenseVerificationCallbackError(isSuccess: boolean, error: NSError): void {
       console.log("callback: "+isSuccess);
+      if (this.callback) {
+        this.callback(isSuccess, error);
+      }
     }
 
     public setCallback(callback: (isSuccess:boolean, error:any) => void): void {
@@ -31,6 +34,7 @@ export class BarcodeReader extends BarcodeReaderCommon {
       console.log("license result: "+isSuccess);
     };
     this.licenseListener = LicenseListenerImpl.new();
+    this.licenseListener.setCallback(cb);
   }
 
   initLicense(license:string) {
