@@ -56,7 +56,6 @@ export class BarcodeReader extends BarcodeReaderCommon {
   initLicense(license:string,listener?:LicenseListener) {
     com.dynamsoft.dbr.BarcodeReader.initLicense(license,new com.dynamsoft.dbr.DBRLicenseVerificationListener({
         DBRLicenseVerificationCallback: function(isSuccessful:boolean,exception:java.lang.Exception){
-          console.log("license initialization: "+isSuccessful);
           if (listener) {
             listener(isSuccessful, exception);
           }

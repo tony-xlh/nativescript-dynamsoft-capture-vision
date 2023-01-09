@@ -59,7 +59,6 @@ export class BarcodeReader extends BarcodeReaderCommon {
   }
 
   initLicense(license:string,listener?:LicenseListener) {
-    console.log("init license: "+license);
     if (!this.licenseListener) {
       this.licenseListener = LicenseListenerImpl.new();
     }
@@ -131,7 +130,6 @@ export class BarcodeReader extends BarcodeReaderCommon {
   }
 
   startScanning(){
-    console.log("start scanning");
     this.dbr.startScanning();
   }
 
@@ -140,7 +138,6 @@ export class BarcodeReader extends BarcodeReaderCommon {
   }
 
   setTextResultListener(listener: TextResultListener){
-    console.log("setTextResultListener");
     if (!this.textResultListener) {
       this.textResultListener = TextResultListenerImpl.new();
     }
