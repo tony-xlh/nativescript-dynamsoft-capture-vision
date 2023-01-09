@@ -141,7 +141,7 @@ export class BarcodeReader extends BarcodeReaderCommon {
     let pThis = this;
     this.dbr.setTextResultListener(new com.dynamsoft.dbr.TextResultListener({
       textResultCallback: function(id: number, imageData: com.dynamsoft.dbr.ImageData, textResults: androidNative.Array<com.dynamsoft.dbr.TextResult>){
-        listener(this.wrapResult(textResults));
+        listener(pThis.wrapResult(textResults));
       }
     }));
   }

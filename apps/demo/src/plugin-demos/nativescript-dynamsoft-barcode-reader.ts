@@ -1,6 +1,6 @@
 import { Observable, EventData, Page } from '@nativescript/core';
 import { DemoSharedNativescriptDynamsoftBarcodeReader } from '@demo/shared';
-import { BarcodeReader,TextResult } from 'nativescript-dynamsoft-barcode-reader';
+import { BarcodeReader,LicenseListener,TextResult } from 'nativescript-dynamsoft-barcode-reader';
 import { CameraEnhancer } from 'nativescript-dynamsoft-camera-enhancer';
 import "./styles.css";
 
@@ -29,7 +29,10 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 	}
 
 	initLicense(){
-		this.dbr.initLicense("DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTE2NDk4Mjk3OTI2MzUiLCJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSIsInNlc3Npb25QYXNzd29yZCI6IndTcGR6Vm05WDJrcEQ5YUoifQ==");
+		const listener:LicenseListener = function (isSuccess:boolean,error:any) {
+      console.log("License initialization result: "+isSuccess);
+		}
+		this.dbr.initLicense("DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTE2NDk4Mjk3OTI2MzUiLCJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSIsInNlc3Npb25QYXNzd29yZCI6IndTcGR6Vm05WDJrcEQ5YUoifQ==", listener);
 	}
 
 	dceLoaded(args: EventData) {
