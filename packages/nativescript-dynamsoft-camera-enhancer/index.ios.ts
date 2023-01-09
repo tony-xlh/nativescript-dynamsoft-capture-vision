@@ -59,6 +59,14 @@ export class CameraEnhancer extends  CameraEnhancerCommon {
     return data.base64Encoding();
   }
 
+  open(){
+    this.dce.open();
+  }
+
+  close(){
+    this.dce.close();
+  }
+
   [activeProperty.setNative](value: boolean) {
     if (value === true) {
       this.dce.open();

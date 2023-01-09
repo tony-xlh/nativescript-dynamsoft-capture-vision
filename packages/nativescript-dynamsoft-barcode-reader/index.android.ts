@@ -1,4 +1,3 @@
-import { AndroidActivityBundleEventData, AndroidApplication, Application } from '@nativescript/core';
 import { LicenseListener, TextResultListener } from '.';
 import { BarcodeReaderCommon, TextResult } from './common';
 
@@ -33,24 +32,6 @@ export class BarcodeReader extends BarcodeReaderCommon {
   constructor(){
     super();
     this.dbr = new com.dynamsoft.dbr.BarcodeReader();
-    this.registerLifeCycleEvents();
-  }
-
-  registerLifeCycleEvents(){
-    let pThis = this;
-    Application.android.on(AndroidApplication.activityPausedEvent, function (args: AndroidActivityBundleEventData) {
-      if (pThis.dbr && pThis.scanning) {
-        console.log("stop scanning");
-        pThis.dbr.stopScanning();
-      }
-    });
-
-    Application.android.on(AndroidApplication.activityResumedEvent, function (args: AndroidActivityBundleEventData) {
-      if (pThis.dbr && pThis.scanning) {
-        console.log("start scanning");
-        pThis.dbr.startScanning();
-      }
-    });
   }
 
   initLicense(license:string,listener?:LicenseListener) {

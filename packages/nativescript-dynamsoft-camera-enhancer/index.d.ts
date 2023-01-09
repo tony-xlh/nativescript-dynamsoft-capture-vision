@@ -7,4 +7,6 @@ export declare class CameraEnhancer extends CameraEnhancerCommon {
     getAllCameras(): string[];
     getSelectedCamera(): string;
     getCameraEnhancer(): any;
+    open(): any;
+    close(): any;
 }

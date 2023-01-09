@@ -1,4 +1,4 @@
-import { Observable, EventData, Page } from '@nativescript/core';
+import { EventData, Page, AndroidActivityBundleEventData, AndroidApplication, Application } from '@nativescript/core';
 import { DemoSharedNativescriptDynamsoftBarcodeReader } from '@demo/shared';
 import { BarcodeReader,LicenseListener,TextResult } from 'nativescript-dynamsoft-barcode-reader';
 import { CameraEnhancer } from 'nativescript-dynamsoft-camera-enhancer';
@@ -27,7 +27,36 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 	constructor(){
 		super();
     this.dbr = new BarcodeReader();
+		this.registerLifeCycleEvents();
 	}
+
+	registerLifeCycleEvents(){
+    let pThis = this;
+    Application.android.on(AndroidApplication.activityPausedEvent, function (args: AndroidActivityBundleEventData) {
+      console.log("paused");
+			if (pThis.dbr && pThis.liveOn) {
+				console.log("stop scanning");
+				pThis.dbr.stopScanning();
+			}
+      if (pThis.dce && pThis.isActive) {
+				console.log("close camera");
+				pThis.dce.close();
+      }
+    });
+
+    Application.android.on(AndroidApplication.activityResumedEvent, function (args: AndroidActivityBundleEventData) {
+      console.log("resumed");
+      if (pThis.dce && pThis.isActive === true) {
+        console.log("restart camera");
+        pThis.dce.open();
+      }
+			if (pThis.dbr && pThis.liveOn) {
+				console.log("start scanning");
+				pThis.dbr.startScanning();
+			}
+    });
+  }
+
 
 	initLicense(){
 		const listener:LicenseListener = function (isSuccess:boolean,error:any) {
@@ -72,7 +101,8 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 
 	async onDecodeFrame(args: EventData){
 		let frame = this.dce.captureFrame();
-    let textResults:TextResult[] = await this.dbr.decodeFrameAsync(frame);
+		console.log(frame);
+    let textResults:TextResult[] = this.dbr.decodeFrame(frame);
 		console.log(textResults);
 		let barcodes = "Found "+textResults.length+" barcodes.\n";
 		textResults.forEach(textResult => {
