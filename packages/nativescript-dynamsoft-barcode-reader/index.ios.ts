@@ -1,16 +1,21 @@
 import { TextResultListener } from '.';
 import { BarcodeReaderCommon, TextResult } from './common';
 
+
 @NativeClass
 class licenseListenerImpl extends NSObject implements DBRLicenseVerificationListener {
-  public static ObjCProtocols = [DBRServerLicenseVerificationDelegate];
-
-  private owner: WeakRef<any>;
   private callback: (isSuccess: boolean, error: any) => void;
-  public static initWithOwner(owner: WeakRef<any>): licenseListenerImpl {
-    let listener = <licenseListenerImpl>licenseListenerImpl.new();
-    listener.owner = owner;
-    return listener;
+  public static ObjCProtocols = [DBRLicenseVerificationListener];
+  static new() {
+    return super.new() as licenseListenerImpl;
+  }
+
+  /**
+     * initialize with the callback
+     */
+  public initWithCallback(callback: (isSuccess:boolean, error:any) => void): licenseListenerImpl {
+    this.callback = callback;
+    return this;
   }
 
   public setCallback(callback: (isSuccess:boolean, error:any) => void): void {
@@ -31,10 +36,10 @@ export class BarcodeReader extends BarcodeReaderCommon {
   constructor(){
     super();
     this.dbr = DynamsoftBarcodeReader.alloc().init();
-    this.licenseListener = licenseListenerImpl.initWithOwner(new WeakRef(this));
-    this.licenseListener.setCallback(function (isSuccess:boolean,error:any) {
+    const cb = function (isSuccess:boolean,error:any) {
       console.log("license result: "+isSuccess);
-    });
+    };
+    this.licenseListener = licenseListenerImpl.new().initWithCallback(cb);
   }
 
   initLicense(license:string) {
