@@ -28,7 +28,6 @@ class DecodingRunnable extends java.lang.Runnable {
 
 export class BarcodeReader extends BarcodeReaderCommon {
   dbr:com.dynamsoft.dbr.BarcodeReader;
-  scanning:boolean = false;
   constructor(){
     super();
     this.dbr = new com.dynamsoft.dbr.BarcodeReader();
@@ -108,12 +107,10 @@ export class BarcodeReader extends BarcodeReaderCommon {
   }
 
   startScanning(){
-    this.scanning = true;
     this.dbr.startScanning();
   }
 
   stopScanning(){
-    this.scanning = false;
     this.dbr.stopScanning();
   }
 
