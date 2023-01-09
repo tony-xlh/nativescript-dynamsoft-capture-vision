@@ -30,7 +30,7 @@ class TextResultListenerImpl
 
     private callback: TextResultListener;
     private wrapResult: (results:NSArray<iTextResult>)=>TextResult[];
-    static ObjCProtocols = [DBRLicenseVerificationListener] // define our native protocalls
+    static ObjCProtocols = [DBRTextResultListener] // define our native protocalls
 
     static new(): TextResultListenerImpl {
         return <TextResultListenerImpl>super.new() // calls new() on the NSObject
@@ -130,6 +130,7 @@ export class BarcodeReader extends BarcodeReaderCommon {
   }
 
   startScanning(){
+    console.log("start scanning");
     this.dbr.startScanning();
   }
 
@@ -138,6 +139,7 @@ export class BarcodeReader extends BarcodeReaderCommon {
   }
 
   setTextResultListener(listener: TextResultListener){
+    console.log("setTextResultListener");
     if (!this.textResultListener) {
       this.textResultListener = TextResultListenerImpl.new();
     }
