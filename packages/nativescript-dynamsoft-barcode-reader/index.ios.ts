@@ -1,4 +1,4 @@
-import { TextResultListener } from '.';
+import { LicenseListener, TextResultListener } from '.';
 import { BarcodeReaderCommon, TextResult } from './common';
 
 @NativeClass()
@@ -30,16 +30,14 @@ export class BarcodeReader extends BarcodeReaderCommon {
   constructor(){
     super();
     this.dbr = DynamsoftBarcodeReader.alloc().init();
-    const cb = function (isSuccess:boolean,error:any) {
-      console.log("license result: "+isSuccess);
-    };
     this.licenseListener = LicenseListenerImpl.new();
-    this.licenseListener.setCallback(cb);
   }
 
-  initLicense(license:string) {
+  initLicense(license:string,listener?:LicenseListener) {
     console.log("init license: "+license);
-    console.log(this.licenseListener);
+    if (listener) {
+      this.licenseListener.setCallback(listener);
+    }
     DynamsoftBarcodeReader.initLicenseVerificationDelegate(license,this.licenseListener);
   }
 

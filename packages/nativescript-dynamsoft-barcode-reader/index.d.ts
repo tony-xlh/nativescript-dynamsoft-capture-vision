@@ -4,8 +4,12 @@ export interface TextResultListener{
     (results:TextResult[]):void;
 }
 
+export interface LicenseListener{
+    (isSuccess:boolean,error:any):void;
+}
+
 export declare class BarcodeReader extends BarcodeReaderCommon {
-    initLicense(license:string):void;
+    initLicense(license:string,licenseListener?:LicenseListener):void;
     decodeFrame(frame:any):TextResult[];
     decodeFrameAsync(frame:any):Promise<TextResult[]>;
     decodeBitmap(bitmap:any):TextResult[];

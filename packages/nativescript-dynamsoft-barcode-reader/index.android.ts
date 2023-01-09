@@ -1,5 +1,5 @@
 import { AndroidActivityBundleEventData, AndroidApplication, Application } from '@nativescript/core';
-import { TextResultListener } from '.';
+import { LicenseListener, TextResultListener } from '.';
 import { BarcodeReaderCommon, TextResult } from './common';
 
 @NativeClass
@@ -53,10 +53,13 @@ export class BarcodeReader extends BarcodeReaderCommon {
     });
   }
 
-  initLicense(license:string) {
+  initLicense(license:string,listener?:LicenseListener) {
     com.dynamsoft.dbr.BarcodeReader.initLicense(license,new com.dynamsoft.dbr.DBRLicenseVerificationListener({
         DBRLicenseVerificationCallback: function(isSuccessful:boolean,exception:java.lang.Exception){
           console.log("license initialization: "+isSuccessful);
+          if (listener) {
+            listener(isSuccessful, exception);
+          }
         }
     }));
   }
@@ -138,7 +141,7 @@ export class BarcodeReader extends BarcodeReaderCommon {
     let pThis = this;
     this.dbr.setTextResultListener(new com.dynamsoft.dbr.TextResultListener({
       textResultCallback: function(id: number, imageData: com.dynamsoft.dbr.ImageData, textResults: androidNative.Array<com.dynamsoft.dbr.TextResult>){
-        listener(pThis.wrapResult(textResults));
+        listener(this.wrapResult(textResults));
       }
     }));
   }
