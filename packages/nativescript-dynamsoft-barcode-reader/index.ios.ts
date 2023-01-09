@@ -1,3 +1,4 @@
+import { TextResultListener } from '.';
 import { BarcodeReaderCommon, TextResult } from './common';
 
 @NativeClass
@@ -109,5 +110,9 @@ export class BarcodeReader extends BarcodeReaderCommon {
 
   stopScanning(){
     this.dbr.stopScanning();
+  }
+
+  setTextResultListener(listener: TextResultListener){
+    console.log(listener);
   }
 }
