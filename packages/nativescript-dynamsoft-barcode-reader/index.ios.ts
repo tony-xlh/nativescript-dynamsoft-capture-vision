@@ -18,6 +18,7 @@ class licenseListenerImpl extends NSObject implements DBRLicenseVerificationList
   }
 
   DBRLicenseVerificationCallbackError(isSuccess: boolean, error: NSError): void {
+    console.log(isSuccess);
     if (this.callback) {
       this.callback(isSuccess,error);
     }
@@ -42,6 +43,7 @@ class licenseDelegateImpl extends NSObject implements DBRServerLicenseVerificati
 
   
   licenseVerificationCallbackError(isSuccess: boolean, error: NSError): void {
+    console.log(isSuccess);
     if (this.callback) {
       this.callback(isSuccess,error);
     }
