@@ -45,6 +45,7 @@ captureFrame(): any;
 captureFrameAsBase64(): string;
 getAllCameras(): string[];
 getSelectedCamera(): string;
+getCameraEnhancer(): any;
 ```
 
 Properties:
