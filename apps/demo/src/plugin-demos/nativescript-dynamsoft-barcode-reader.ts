@@ -35,12 +35,13 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 	dceLoaded(args: EventData) {
 		this.dce = <CameraEnhancer>args.object;
 		this.dbr.setCameraEnhancer(this.dce.getCameraEnhancer());
+		let pThis = this;
 		this.dbr.setTextResultListener(function (textResults:TextResult[]) {
 			let barcodes = "Found "+textResults.length+" barcodes.\n";
 			textResults.forEach(textResult => {
 				barcodes = barcodes + textResult.barcodeFormat + ": " + textResult.barcodeText + "\n";
 			});
-			this.set("barcodeText",barcodes);
+			pThis.set("barcodeText",barcodes);
 			console.log(barcodes);
 		})
 	}
