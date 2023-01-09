@@ -29,7 +29,6 @@ class CaptureRunnable extends java.lang.Runnable {
 export class CameraEnhancer extends CameraEnhancerCommon {
   cameraView: com.dynamsoft.dce.DCECameraView;
   dce:com.dynamsoft.dce.CameraEnhancer;
-  openDesired:boolean = false;
   // @ts-ignore
   get android(): com.dynamsoft.dce.DCECameraView {
     return this.nativeView;
@@ -107,7 +106,6 @@ export class CameraEnhancer extends CameraEnhancerCommon {
   }
 
   [activeProperty.setNative](value: boolean) {
-    this.openDesired = value;
     if (value === true) {
       this.dce.open();
     }else{
