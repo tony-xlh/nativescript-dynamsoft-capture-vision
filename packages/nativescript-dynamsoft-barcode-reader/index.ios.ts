@@ -1,45 +1,36 @@
 import { TextResultListener } from '.';
 import { BarcodeReaderCommon, TextResult } from './common';
 
+@NativeClass()
+class LicenseListenerImpl
+    extends NSObject // native delegates mostly always extend NSObject
+    implements DBRLicenseVerificationListener {
+    private callback: (isSuccess: boolean, error: any) => void;
+    static ObjCProtocols = [DBRLicenseVerificationListener] // define our native protocalls
 
-@NativeClass
-class licenseListenerImpl extends NSObject implements DBRLicenseVerificationListener {
-  private callback: (isSuccess: boolean, error: any) => void;
-  public static ObjCProtocols = [DBRLicenseVerificationListener];
-  static new() {
-    return super.new() as licenseListenerImpl;
-  }
-
-  /**
-     * initialize with the callback
-     */
-  public initWithCallback(callback: (isSuccess:boolean, error:any) => void): licenseListenerImpl {
-    this.callback = callback;
-    return this;
-  }
-
-  public setCallback(callback: (isSuccess:boolean, error:any) => void): void {
-    this.callback = callback;
-  }
-
-  DBRLicenseVerificationCallbackError(isSuccess: boolean, error: NSError): void {
-    console.log(isSuccess);
-    if (this.callback) {
-      this.callback(isSuccess,error);
+    static new(): LicenseListenerImpl {
+        return <LicenseListenerImpl>super.new() // calls new() on the NSObject
     }
-  }
+    
+    DBRLicenseVerificationCallbackError(isSuccess: boolean, error: NSError): void {
+      console.log("callback: "+isSuccess);
+    }
+
+    public setCallback(callback: (isSuccess:boolean, error:any) => void): void {
+      this.callback = callback;
+    }
 }
 
 export class BarcodeReader extends BarcodeReaderCommon {
   dbr:DynamsoftBarcodeReader;
-  licenseListener:licenseListenerImpl;
+  licenseListener:LicenseListenerImpl;
   constructor(){
     super();
     this.dbr = DynamsoftBarcodeReader.alloc().init();
     const cb = function (isSuccess:boolean,error:any) {
       console.log("license result: "+isSuccess);
     };
-    this.licenseListener = licenseListenerImpl.new().initWithCallback(cb);
+    this.licenseListener = LicenseListenerImpl.new();
   }
 
   initLicense(license:string) {
