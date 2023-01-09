@@ -45,6 +45,7 @@ class TextResultListenerImpl
 
     public setCallback(callback: TextResultListener,wrapResult:(results:NSArray<iTextResult>)=>TextResult[]) {
       this.callback = callback;
+      this.wrapResult = wrapResult;
     }
 }
 
