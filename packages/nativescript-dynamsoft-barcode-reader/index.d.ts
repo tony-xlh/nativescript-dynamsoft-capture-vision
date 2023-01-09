@@ -1,5 +1,9 @@
 import { BarcodeReaderCommon, TextResult } from './common';
 
+export interface TextResultListener{
+    (results:TextResult[]):void;
+}
+
 export declare class BarcodeReader extends BarcodeReaderCommon {
     initLicense(license:string):void;
     decodeFrame(frame:any):TextResult[];
@@ -10,6 +14,7 @@ export declare class BarcodeReader extends BarcodeReaderCommon {
     setCameraEnhancer(dce:any):void;
     startScanning():void;
     stopScanning():void;
+    setTextResultListener(listener: TextResultListener);
 }
 
 export * from "./common";

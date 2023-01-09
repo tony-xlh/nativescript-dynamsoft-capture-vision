@@ -1,3 +1,4 @@
+import { TextResultListener } from '.';
 import { BarcodeReaderCommon, TextResult } from './common';
 
 @NativeClass
@@ -109,5 +110,13 @@ export class BarcodeReader extends BarcodeReaderCommon {
 
   stopScanning(){
     this.dbr.stopScanning();
+  }
+
+  setTextResultListener(listener: TextResultListener){
+    this.dbr.setTextResultListener(new com.dynamsoft.dbr.TextResultListener({
+      textResultCallback: function(id: number, imageData: com.dynamsoft.dbr.ImageData, textResults: androidNative.Array<com.dynamsoft.dbr.TextResult>){
+        listener(this.wrapResult(textResults));
+      }
+    }));
   }
 }
