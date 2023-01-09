@@ -1,6 +1,6 @@
 {
   "name": "nativescript-dynamsoft-camera-enhancer",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Nativescript plugin for Dynamsoft Camera Enhancer",
   "main": "index",
   "typings": "index.d.ts",
