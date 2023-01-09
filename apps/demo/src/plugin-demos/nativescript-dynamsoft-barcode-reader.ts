@@ -28,8 +28,8 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 		super();
     this.dbr = new BarcodeReader();
 		//scan QR code only
-		const template = "{\"ImageParameter\":{\"BarcodeFormatIds\":[\"BF_QR_CODE\"],\"Description\":\"\",\"Name\":\"Settings\"},\"Version\":\"3.0\"}";
-		this.dbr.initRuntimeSettingsWithString(template);
+		//const template = "{\"ImageParameter\":{\"BarcodeFormatIds\":[\"BF_QR_CODE\"],\"Description\":\"\",\"Name\":\"Settings\"},\"Version\":\"3.0\"}";
+		//this.dbr.initRuntimeSettingsWithString(template);
 		this.registerLifeCycleEvents();
 	}
 
