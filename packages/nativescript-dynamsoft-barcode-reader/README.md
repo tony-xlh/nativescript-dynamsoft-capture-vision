@@ -48,6 +48,7 @@ Methods:
 
 ```ts
 initLicense(license:string,licenseListener?:LicenseListener):void;
+initRuntimeSettingsWithString(template:string);
 decodeFrame(frame:any):TextResult[];
 decodeFrameAsync(frame:any):Promise<TextResult[]>;
 decodeBitmap(bitmap:any):TextResult[];
