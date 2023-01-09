@@ -23,6 +23,11 @@ class LicenseListenerImpl
     }
 }
 
+/**
+ * "Listener" for text result events
+ *
+ * @link https://v7.docs.nativescript.org/core-concepts/ios-runtime/how-to/objc-subclassing#typescript-delegate-example
+ */
 @NativeClass()
 class TextResultListenerImpl
     extends NSObject // native delegates mostly always extend NSObject
