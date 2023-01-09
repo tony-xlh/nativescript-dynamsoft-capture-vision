@@ -31,30 +31,32 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 	}
 
 	registerLifeCycleEvents(){
-    let pThis = this;
-    Application.android.on(AndroidApplication.activityPausedEvent, function (args: AndroidActivityBundleEventData) {
-      console.log("paused");
-			if (pThis.dbr && pThis.liveOn) {
-				console.log("stop scanning");
-				pThis.dbr.stopScanning();
-			}
-      if (pThis.dce && pThis.isActive) {
-				console.log("close camera");
-				pThis.dce.close();
-      }
-    });
-
-    Application.android.on(AndroidApplication.activityResumedEvent, function (args: AndroidActivityBundleEventData) {
-      console.log("resumed");
-      if (pThis.dce && pThis.isActive === true) {
-        console.log("restart camera");
-        pThis.dce.open();
-      }
-			if (pThis.dbr && pThis.liveOn) {
-				console.log("start scanning");
-				pThis.dbr.startScanning();
-			}
-    });
+		if (global.isAndroid) {
+			let pThis = this;
+			Application.android.on(AndroidApplication.activityPausedEvent, function (args: AndroidActivityBundleEventData) {
+				console.log("paused");
+				if (pThis.dbr && pThis.liveOn) {
+					console.log("stop scanning");
+					pThis.dbr.stopScanning();
+				}
+				if (pThis.dce && pThis.isActive) {
+					console.log("close camera");
+					pThis.dce.close();
+				}
+			});
+	
+			Application.android.on(AndroidApplication.activityResumedEvent, function (args: AndroidActivityBundleEventData) {
+				console.log("resumed");
+				if (pThis.dce && pThis.isActive === true) {
+					console.log("restart camera");
+					pThis.dce.open();
+				}
+				if (pThis.dbr && pThis.liveOn) {
+					console.log("start scanning");
+					pThis.dbr.startScanning();
+				}
+			});
+		}
   }
 
 
