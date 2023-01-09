@@ -13,7 +13,6 @@ class LicenseListenerImpl
     }
     
     DBRLicenseVerificationCallbackError(isSuccess: boolean, error: NSError): void {
-      console.log("callback: "+isSuccess);
       if (this.callback) {
         this.callback(isSuccess, error);
       }
@@ -24,17 +23,45 @@ class LicenseListenerImpl
     }
 }
 
+@NativeClass()
+class TextResultListenerImpl
+    extends NSObject // native delegates mostly always extend NSObject
+    implements DBRTextResultListener {
+
+    private callback: TextResultListener;
+    private wrapResult: (results:NSArray<iTextResult>)=>TextResult[];
+    static ObjCProtocols = [DBRLicenseVerificationListener] // define our native protocalls
+
+    static new(): TextResultListenerImpl {
+        return <TextResultListenerImpl>super.new() // calls new() on the NSObject
+    }
+    
+    textResultCallbackImageDataResults(frameId: number, imageData: iImageData, results: NSArray<iTextResult> | iTextResult[]): void {
+      if (this.callback) {
+        // @ts-ignore
+        this.callback(this.wrapResult(results));
+      }
+    }
+
+    public setCallback(callback: TextResultListener,wrapResult:(results:NSArray<iTextResult>)=>TextResult[]) {
+      this.callback = callback;
+    }
+}
+
 export class BarcodeReader extends BarcodeReaderCommon {
   dbr:DynamsoftBarcodeReader;
   licenseListener:LicenseListenerImpl;
+  textResultListener:TextResultListenerImpl;
   constructor(){
     super();
     this.dbr = DynamsoftBarcodeReader.alloc().init();
-    this.licenseListener = LicenseListenerImpl.new();
   }
 
   initLicense(license:string,listener?:LicenseListener) {
     console.log("init license: "+license);
+    if (!this.licenseListener) {
+      this.licenseListener = LicenseListenerImpl.new();
+    }
     if (listener) {
       this.licenseListener.setCallback(listener);
     }
@@ -111,6 +138,10 @@ export class BarcodeReader extends BarcodeReaderCommon {
   }
 
   setTextResultListener(listener: TextResultListener){
-    console.log(listener);
+    if (!this.textResultListener) {
+      this.textResultListener = TextResultListenerImpl.new();
+    }
+    this.textResultListener.setCallback(listener,this.wrapResult);
+    this.dbr.setDBRTextResultListener(this.textResultListener)
   }
 }
