@@ -43,6 +43,10 @@ export class BarcodeReader extends BarcodeReaderCommon {
     }));
   }
 
+  initRuntimeSettingsWithString(template:string) {
+    this.dbr.initRuntimeSettingsWithString(template,EnumConflictMode.Overwrite);
+  }
+
   decodeFrameAsync(frame:any):Promise<TextResult[]> {
     let pThis = this;
     return new Promise(function (resolve, reject) {

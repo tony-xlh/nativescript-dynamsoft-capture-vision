@@ -73,6 +73,10 @@ export class BarcodeReader extends BarcodeReaderCommon {
     DynamsoftBarcodeReader.initLicenseVerificationDelegate(license,this.licenseListener);
   }
 
+  initRuntimeSettingsWithString(template:string) {
+    this.dbr.initRuntimeSettingsWithStringConflictModeError(template,EnumConflictMode.Overwrite);
+  }
+
   decodeFrameAsync(frame:any):Promise<TextResult[]> {
     let pThis = this;
     return new Promise(function (resolve, reject) {
