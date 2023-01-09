@@ -8,6 +8,8 @@ export declare class BarcodeReader extends BarcodeReaderCommon {
     decodeBase64(base64:string):TextResult[];
     decodeFile(file:string):TextResult[];
     setCameraEnhancer(dce:any):void;
+    startScanning():void;
+    stopScanning():void;
 }
 
 export * from "./common";

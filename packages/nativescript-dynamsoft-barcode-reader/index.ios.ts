@@ -73,4 +73,12 @@ export class BarcodeReader extends BarcodeReaderCommon {
   setCameraEnhancer(dce:any) {
     this.dbr.setCameraEnhancer(dce);
   }
+
+  startScanning(){
+    this.dbr.startScanning();
+  }
+
+  stopScanning(){
+    this.dbr.stopScanning();
+  }
 }
