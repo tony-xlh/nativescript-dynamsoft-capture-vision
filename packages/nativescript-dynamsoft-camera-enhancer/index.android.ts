@@ -113,6 +113,10 @@ export class CameraEnhancer extends CameraEnhancerCommon {
     return this.dce.getSelectedCamera();
   }
 
+  getCameraEnhancer(): com.dynamsoft.dce.CameraEnhancer {
+    return this.dce;
+  }
+
   bitmap2Base64(bitmap:android.graphics.Bitmap):string{
     let outputStream = new java.io.ByteArrayOutputStream();
     bitmap.compress(android.graphics.Bitmap.CompressFormat.JPEG, 100, outputStream);

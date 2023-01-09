@@ -50,6 +50,10 @@ export class CameraEnhancer extends  CameraEnhancerCommon {
     return this.dce.getSelectedCamera();
   }
 
+  getCameraEnhancer(): DynamsoftCameraEnhancer {
+    return this.dce;
+  }
+
   UIImage2Base64(image:UIImage):string{
     let data = UIImageJPEGRepresentation(image,100);
     return data.base64Encoding();
