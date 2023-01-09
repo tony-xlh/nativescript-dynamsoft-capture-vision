@@ -2,6 +2,29 @@ import { TextResultListener } from '.';
 import { BarcodeReaderCommon, TextResult } from './common';
 
 @NativeClass
+class licenseListenerImpl extends NSObject implements DBRLicenseVerificationListener {
+  public static ObjCProtocols = [DBRServerLicenseVerificationDelegate];
+
+  private owner: WeakRef<any>;
+  private callback: (isSuccess: boolean, error: any) => void;
+  public static initWithOwner(owner: WeakRef<any>): licenseListenerImpl {
+    let delegate = <licenseListenerImpl>licenseDelegateImpl.new();
+    delegate.owner = owner;
+    return delegate;
+  }
+
+  public setCallback(callback: (isSuccess:boolean, error:any) => void): void {
+    this.callback = callback;
+  }
+
+  DBRLicenseVerificationCallbackError(isSuccess: boolean, error: NSError): void {
+    if (this.callback) {
+      this.callback(isSuccess,error);
+    }
+  }
+}
+
+@NativeClass
 class licenseDelegateImpl extends NSObject implements DBRServerLicenseVerificationDelegate {
   public static ObjCProtocols = [DBRServerLicenseVerificationDelegate];
 
@@ -27,20 +50,19 @@ class licenseDelegateImpl extends NSObject implements DBRServerLicenseVerificati
 
 export class BarcodeReader extends BarcodeReaderCommon {
   dbr:DynamsoftBarcodeReader;
-  licenseDelegate:licenseDelegateImpl;
+  licenseListener:licenseListenerImpl;
   constructor(){
     super();
     this.dbr = DynamsoftBarcodeReader.alloc().init();
-    this.licenseDelegate = licenseDelegateImpl.initWithOwner(new WeakRef(this));
-    this.licenseDelegate.setCallback(function (isSuccess:boolean,error:any) {
+    this.licenseListener = licenseListenerImpl.initWithOwner(new WeakRef(this));
+    this.licenseListener.setCallback(function (isSuccess:boolean,error:any) {
       console.log("license result: "+isSuccess);
     });
   }
 
   initLicense(license:string) {
     console.log("init license: "+license);
-    // @ts-ignore
-    DynamsoftBarcodeReader.initLicenseVerificationDelegate(license,this.licenseDelegate);
+    DynamsoftBarcodeReader.initLicenseVerificationDelegate(license,this.licenseListener);
   }
 
   decodeFrameAsync(frame:any):Promise<TextResult[]> {
