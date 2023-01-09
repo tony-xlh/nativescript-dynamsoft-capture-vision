@@ -8,9 +8,9 @@ class licenseListenerImpl extends NSObject implements DBRLicenseVerificationList
   private owner: WeakRef<any>;
   private callback: (isSuccess: boolean, error: any) => void;
   public static initWithOwner(owner: WeakRef<any>): licenseListenerImpl {
-    let delegate = <licenseListenerImpl>licenseDelegateImpl.new();
-    delegate.owner = owner;
-    return delegate;
+    let listener = <licenseListenerImpl>licenseDelegateImpl.new();
+    listener.owner = owner;
+    return listener;
   }
 
   public setCallback(callback: (isSuccess:boolean, error:any) => void): void {
@@ -64,6 +64,7 @@ export class BarcodeReader extends BarcodeReaderCommon {
 
   initLicense(license:string) {
     console.log("init license: "+license);
+    console.log(this.licenseListener);
     DynamsoftBarcodeReader.initLicenseVerificationDelegate(license,this.licenseListener);
   }
 
