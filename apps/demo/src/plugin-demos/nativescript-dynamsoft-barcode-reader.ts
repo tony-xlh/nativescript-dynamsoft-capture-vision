@@ -44,7 +44,9 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 			textResults.forEach(textResult => {
 				barcodes = barcodes + textResult.barcodeFormat + ": " + textResult.barcodeText + "\n";
 			});
-			pThis.set("barcodeText",barcodes);
+			setTimeout(function(){
+				pThis.set("barcodeText",barcodes);
+			}, 0);
 			console.log(barcodes);
 		})
 	}
