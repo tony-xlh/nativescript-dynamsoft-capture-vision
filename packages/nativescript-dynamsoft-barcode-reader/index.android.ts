@@ -44,7 +44,7 @@ export class BarcodeReader extends BarcodeReaderCommon {
   }
 
   initRuntimeSettingsWithString(template:string) {
-    this.dbr.initRuntimeSettingsWithString(template,EnumConflictMode.Overwrite);
+    this.dbr.initRuntimeSettingsWithString(template,com.dynamsoft.dbr.EnumConflictMode.CM_OVERWRITE);
   }
 
   decodeFrameAsync(frame:any):Promise<TextResult[]> {
