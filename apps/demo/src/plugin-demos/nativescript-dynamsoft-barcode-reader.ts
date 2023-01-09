@@ -34,6 +34,15 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 
 	dceLoaded(args: EventData) {
 		this.dce = <CameraEnhancer>args.object;
+		this.dbr.setCameraEnhancer(this.dce.getCameraEnhancer());
+		this.dbr.setTextResultListener(function (textResults:TextResult[]) {
+			let barcodes = "Found "+textResults.length+" barcodes.\n";
+			textResults.forEach(textResult => {
+				barcodes = barcodes + textResult.barcodeFormat + ": " + textResult.barcodeText + "\n";
+			});
+			this.set("barcodeText",barcodes);
+			console.log(barcodes);
+		})
 	}
 
 	onSwitchCamera(args: EventData) {
@@ -80,6 +89,18 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 	}
 
 	toggleLiveDetection(){
+		if (this.liveOn === false) {
+			this.liveOn = true;
+			this.set("liveButtonText","Turn off Live Detection");
+			this.dbr.startScanning();
+		}else{
+			this.liveOn = false;
+			this.set("liveButtonText","Turn on Live Detection");
+			this.dbr.stopScanning();
+		}
+	}
+
+	toggleLiveDetection2(){
 		if (this.liveOn === false) {
 			this.liveOn = true;
 			this.set("liveButtonText","Turn off Live Detection");
