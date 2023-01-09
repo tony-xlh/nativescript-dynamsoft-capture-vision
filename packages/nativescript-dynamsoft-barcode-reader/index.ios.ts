@@ -8,7 +8,7 @@ class licenseListenerImpl extends NSObject implements DBRLicenseVerificationList
   private owner: WeakRef<any>;
   private callback: (isSuccess: boolean, error: any) => void;
   public static initWithOwner(owner: WeakRef<any>): licenseListenerImpl {
-    let listener = <licenseListenerImpl>licenseDelegateImpl.new();
+    let listener = <licenseListenerImpl>licenseListenerImpl.new();
     listener.owner = owner;
     return listener;
   }
@@ -18,31 +18,6 @@ class licenseListenerImpl extends NSObject implements DBRLicenseVerificationList
   }
 
   DBRLicenseVerificationCallbackError(isSuccess: boolean, error: NSError): void {
-    console.log(isSuccess);
-    if (this.callback) {
-      this.callback(isSuccess,error);
-    }
-  }
-}
-
-@NativeClass
-class licenseDelegateImpl extends NSObject implements DBRServerLicenseVerificationDelegate {
-  public static ObjCProtocols = [DBRServerLicenseVerificationDelegate];
-
-  private owner: WeakRef<any>;
-  private callback: (isSuccess: boolean, error: any) => void;
-  public static initWithOwner(owner: WeakRef<any>): licenseDelegateImpl {
-    let delegate = <licenseDelegateImpl>licenseDelegateImpl.new();
-    delegate.owner = owner;
-    return delegate;
-  }
-
-  public setCallback(callback: (isSuccess:boolean, error:any) => void): void {
-    this.callback = callback;
-  }
-
-  
-  licenseVerificationCallbackError(isSuccess: boolean, error: NSError): void {
     console.log(isSuccess);
     if (this.callback) {
       this.callback(isSuccess,error);
