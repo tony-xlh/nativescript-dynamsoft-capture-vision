@@ -109,7 +109,7 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 		console.log(frame);
     let textResults:TextResult[] = this.dbr.decodeFrame(frame);
 		console.log(textResults);
-		let barcodes = "Found "+textResults.length+" barcodes.\n";
+		let barcodes = "Found "+textResults.length+" barcode(s).\n";
 		textResults.forEach(textResult => {
 			barcodes = barcodes + textResult.barcodeFormat + ": " + textResult.barcodeText + "\n";
 		});
@@ -131,7 +131,7 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 			this.dbr.startScanning();
 			const rerender = async () => {
 				console.log("rerender");
-				let barcodes = "Found "+this.barcodes.length+" barcodes.\n";
+				let barcodes = "Found "+this.barcodes.length+" barcode(s).\n";
 				this.barcodes.forEach(textResult => {
 					barcodes = barcodes + textResult.barcodeFormat + ": " + textResult.barcodeText + "\n";
 				});
@@ -166,7 +166,7 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftBarcodeReader {
 				let frame = this.dce.captureFrame();
 				if (frame) {
 					let textResults:TextResult[] = await this.dbr.decodeFrameAsync(frame);
-					let barcodes = "Found "+textResults.length+" barcodes.\n";
+					let barcodes = "Found "+textResults.length+" barcode(s).\n";
 					textResults.forEach(textResult => {
 						barcodes = barcodes + textResult.barcodeFormat + ": " + textResult.barcodeText + "\n";
 					});
