@@ -1,5 +1,6 @@
 import { Application,Utils } from '@nativescript/core';
-import { activeProperty, cameraIDProperty, CameraEnhancerCommon, torchProperty, Resolution, EnumCameraResolution } from './common';
+import { Resolution } from '.';
+import { activeProperty, cameraIDProperty, CameraEnhancerCommon, torchProperty} from './common';
 
 
 @NativeClass
@@ -94,20 +95,20 @@ export class CameraEnhancer extends CameraEnhancerCommon {
     return {width:width,height:height};
   }
 
-  setResolution(res:EnumCameraResolution) {
+  setResolution(res:Resolution) {
+    console.log("setResolution");
+    console.log(res);
     let targetRes:com.dynamsoft.dce.EnumResolution;
-    if (res === EnumCameraResolution.RESOLUTION_AUTO) {
-      targetRes = com.dynamsoft.dce.EnumResolution.RESOLUTION_AUTO;
-    }else if (res === EnumCameraResolution.RESOLUTION_480P) {
+    if (res.width === 640 && res.height === 480) {
       targetRes = com.dynamsoft.dce.EnumResolution.RESOLUTION_480P;
-    }else if (res === EnumCameraResolution.RESOLUTION_720P) {
+    }else if (res.width === 1280 && res.height === 720) {
       targetRes = com.dynamsoft.dce.EnumResolution.RESOLUTION_720P;
-    }else if (res === EnumCameraResolution.RESOLUTION_1080P) {
+    }else if (res.width === 1920 && res.height === 1080) {
       targetRes = com.dynamsoft.dce.EnumResolution.RESOLUTION_1080P;
-    }else if (res === EnumCameraResolution.RESOLUTION_4K) {
+    }else if (res.width === 3840 && res.height === 2160) {
       targetRes = com.dynamsoft.dce.EnumResolution.RESOLUTION_4K;
     }else {
-      throw new Error("Unsupported resolution");
+      targetRes = com.dynamsoft.dce.EnumResolution.RESOLUTION_AUTO;
     }
     this.dce.setResolution(targetRes);
   }

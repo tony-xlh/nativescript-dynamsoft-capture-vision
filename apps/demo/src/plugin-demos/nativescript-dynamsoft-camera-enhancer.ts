@@ -1,8 +1,7 @@
 import { AndroidActivityBundleEventData, AndroidApplication, Application, EventData, Page } from '@nativescript/core';
 import { DemoSharedNativescriptDynamsoftCameraEnhancer } from '@demo/shared';
-import { CameraEnhancer } from 'nativescript-dynamsoft-camera-enhancer';
+import { CameraEnhancer, Resolution } from 'nativescript-dynamsoft-camera-enhancer';
 import "./styles.css";
-import { EnumCameraResolution } from '@xulihang/nativescript-dynamsoft-camera-enhancer/common';
 
 export function navigatingTo(args: EventData) {
 	const page = <Page>args.object;
@@ -19,8 +18,11 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftCameraEnhancer {
 
 	dceLoaded(args: EventData) {
 		this.dce = <CameraEnhancer>args.object;
-		this.dce.setResolution(EnumCameraResolution.RESOLUTION_480P);
 		this.registerLifeCycleEvents();
+		let targetRes:Resolution = {width:640,height:480};
+		console.log("targetRes");
+		console.log(targetRes);
+		this.dce.setResolution(targetRes);
 	}
 
 	registerLifeCycleEvents(){

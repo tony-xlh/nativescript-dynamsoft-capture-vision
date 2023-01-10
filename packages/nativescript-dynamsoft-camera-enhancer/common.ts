@@ -1,13 +1,5 @@
 import { booleanConverter, Observable, Property, View } from '@nativescript/core';
 
-export enum EnumCameraResolution {
-    RESOLUTION_AUTO = 0,
-    RESOLUTION_480P = 1,
-    RESOLUTION_720P = 2,
-    RESOLUTION_1080P = 3,
-    RESOLUTION_4K = 4
-  }
-
 export interface Resolution {
   width: number;
   height: number;
