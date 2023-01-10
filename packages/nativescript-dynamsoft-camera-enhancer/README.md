@@ -46,8 +46,12 @@ captureFrameAsBase64(): string;
 getAllCameras(): string[];
 getSelectedCamera(): string;
 getCameraEnhancer(): any;
-open(): any;
-close(): any;
+getResolution(): Resolution;
+setResolution(resolution:Resolution): void;
+setZoom(factor:number);
+getMaxZoomFactor(): number;
+open(): void;
+close(): void;
 ```
 
 Properties:
@@ -56,6 +60,15 @@ Properties:
 active:boolean //whether the camera is open
 torch:boolean  //whether the torch is on
 cameraID:string //the selected camera ID
+```
+
+Interfaces:
+
+```ts
+export interface Resolution {
+  width: number;
+  height: number;
+}
 ```
 
 
