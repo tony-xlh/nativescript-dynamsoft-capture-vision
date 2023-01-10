@@ -1,7 +1,8 @@
-import { EventData, Page } from '@nativescript/core';
+import { AndroidActivityBundleEventData, AndroidApplication, Application, EventData, Page } from '@nativescript/core';
 import { DemoSharedNativescriptDynamsoftCameraEnhancer } from '@demo/shared';
 import { CameraEnhancer } from 'nativescript-dynamsoft-camera-enhancer';
 import "./styles.css";
+import { EnumCameraResolution } from '@xulihang/nativescript-dynamsoft-camera-enhancer/common';
 
 export function navigatingTo(args: EventData) {
 	const page = <Page>args.object;
@@ -18,7 +19,30 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftCameraEnhancer {
 
 	dceLoaded(args: EventData) {
 		this.dce = <CameraEnhancer>args.object;
+		this.dce.setResolution(EnumCameraResolution.RESOLUTION_480P);
+		this.registerLifeCycleEvents();
 	}
+
+	registerLifeCycleEvents(){
+		if (global.isAndroid) {
+			let pThis = this;
+			Application.android.on(AndroidApplication.activityPausedEvent, function (args: AndroidActivityBundleEventData) {
+				console.log("paused");
+				if (pThis.dce && pThis.isActive) {
+					console.log("close camera");
+					pThis.dce.close();
+				}
+			});
+	
+			Application.android.on(AndroidApplication.activityResumedEvent, function (args: AndroidActivityBundleEventData) {
+				console.log("resumed");
+				if (pThis.dce && pThis.isActive === true) {
+					console.log("restart camera");
+					pThis.dce.open();
+				}
+			});
+		}
+  }
 
 	onSwitchCamera(args: EventData) {
 		if (this.dce) {
@@ -43,6 +67,7 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftCameraEnhancer {
 
 	onCaptureFrame(args: EventData) {
 		if (this.dce) {
+			console.log(this.dce.getResolution());
 			let width,height;
 			const frame = this.dce.captureFrame();
 			if (global.isAndroid) {

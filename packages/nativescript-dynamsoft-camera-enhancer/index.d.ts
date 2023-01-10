@@ -1,4 +1,4 @@
-import { CameraEnhancerCommon } from './common';
+import { CameraEnhancerCommon, EnumCameraResolution, Resolution } from './common';
 
 export declare class CameraEnhancer extends CameraEnhancerCommon {
     captureFrame(): any;
@@ -7,6 +7,8 @@ export declare class CameraEnhancer extends CameraEnhancerCommon {
     getAllCameras(): string[];
     getSelectedCamera(): string;
     getCameraEnhancer(): any;
-    open(): any;
-    close(): any;
+    open(): void;
+    close(): void;
+    getResolution(): Resolution;
+    setResolution(resolution:EnumCameraResolution): void;
 }

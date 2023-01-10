@@ -1,4 +1,4 @@
-import { activeProperty, CameraEnhancerCommon, cameraIDProperty, torchProperty } from './common';
+import { activeProperty, CameraEnhancerCommon, cameraIDProperty, EnumCameraResolution, Resolution, torchProperty } from './common';
 
 export class CameraEnhancer extends  CameraEnhancerCommon {
   dce:DynamsoftCameraEnhancer
@@ -65,6 +65,32 @@ export class CameraEnhancer extends  CameraEnhancerCommon {
 
   close(){
     this.dce.close();
+  }
+
+  getResolution():Resolution {
+    let res = this.dce.getResolution()
+    console.log(res);
+    let width = parseInt(res.split("x")[0]);
+    let height = parseInt(res.split("x")[1]);
+    return {width:width,height:height};
+  }
+
+  setResolution(res:EnumCameraResolution) {
+    let targetRes:EnumResolution;
+    if (res === EnumCameraResolution.RESOLUTION_AUTO) {
+      targetRes = EnumResolution.ESOLUTION_AUTO;
+    }else if (res === EnumCameraResolution.RESOLUTION_480P) {
+      targetRes = EnumResolution.ESOLUTION_480P;
+    }else if (res === EnumCameraResolution.RESOLUTION_720P) {
+      targetRes = EnumResolution.ESOLUTION_720P;
+    }else if (res === EnumCameraResolution.RESOLUTION_1080P) {
+      targetRes = EnumResolution.ESOLUTION_1080P;
+    }else if (res === EnumCameraResolution.RESOLUTION_4K) {
+      targetRes = EnumResolution.ESOLUTION_4K;
+    }else {
+      throw new Error("Unsupported resolution");
+    }
+    this.dce.setResolution(targetRes);
   }
 
   [activeProperty.setNative](value: boolean) {
