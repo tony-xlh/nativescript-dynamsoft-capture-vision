@@ -69,8 +69,7 @@ export class CameraEnhancer extends  CameraEnhancerCommon {
   }
 
   getResolution():Resolution {
-    let res = this.dce.getResolution()
-    console.log(res);
+    let res = this.dce.getResolution();
     let width = parseInt(res.split("x")[0]);
     let height = parseInt(res.split("x")[1]);
     return {width:width,height:height};
@@ -90,6 +89,14 @@ export class CameraEnhancer extends  CameraEnhancerCommon {
       targetRes = EnumResolution.ESOLUTION_AUTO;
     }
     this.dce.setResolution(targetRes);
+  }
+
+  setZoom(factor:number){
+    this.dce.setZoom(factor);
+  }
+
+  getMaxZoomFactor():number{
+    return this.dce.getMaxZoomFactor();
   }
 
   [activeProperty.setNative](value: boolean) {

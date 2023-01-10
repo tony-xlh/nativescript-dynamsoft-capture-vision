@@ -11,6 +11,7 @@
         <StackLayout row="1">
             <Button class="btn btn-primary" text="Switch Torch" tap="{{ onSwitchTorch }}"></Button>
             <Button class="btn btn-primary" text="Switch Camera" tap="{{ onSwitchCamera }}"></Button>
+            <Button class="btn btn-primary" text="Toggle Zoom" tap="{{ onToggleZoom }}"></Button>
             <Button class="btn btn-primary" text="Capture Frame" tap="{{ onCaptureFrame }}"></Button>
         </StackLayout>
     </GridLayout>

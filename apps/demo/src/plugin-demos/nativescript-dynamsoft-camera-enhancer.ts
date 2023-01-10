@@ -15,7 +15,7 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftCameraEnhancer {
 
 	dce:CameraEnhancer;
 	cameras:string[]|undefined;
-
+  zoomed:boolean = false;
 	dceLoaded(args: EventData) {
 		this.dce = <CameraEnhancer>args.object;
 		this.registerLifeCycleEvents();
@@ -69,7 +69,6 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftCameraEnhancer {
 
 	onCaptureFrame(args: EventData) {
 		if (this.dce) {
-			console.log(this.dce.getResolution());
 			let width,height;
 			const frame = this.dce.captureFrame();
 			if (global.isAndroid) {
@@ -82,6 +81,18 @@ export class DemoModel extends DemoSharedNativescriptDynamsoftCameraEnhancer {
 			alert("Captured a "+width+"x"+height+" sized frame");
 		}else{
 			alert("dce undefined");
+		}
+	}
+
+	onToggleZoom(args: EventData) {
+		if (this.dce) {
+			if (this.zoomed) {
+				this.dce.setZoom(1.0);
+				this.zoomed = false;
+			}else{
+				this.dce.setZoom(2.0);
+				this.zoomed = true;
+			}
 		}
 	}
 }

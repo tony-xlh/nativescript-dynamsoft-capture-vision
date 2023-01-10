@@ -96,8 +96,6 @@ export class CameraEnhancer extends CameraEnhancerCommon {
   }
 
   setResolution(res:Resolution) {
-    console.log("setResolution");
-    console.log(res);
     let targetRes:com.dynamsoft.dce.EnumResolution;
     if (res.width === 640 && res.height === 480) {
       targetRes = com.dynamsoft.dce.EnumResolution.RESOLUTION_480P;
@@ -111,6 +109,14 @@ export class CameraEnhancer extends CameraEnhancerCommon {
       targetRes = com.dynamsoft.dce.EnumResolution.RESOLUTION_AUTO;
     }
     this.dce.setResolution(targetRes);
+  }
+
+  setZoom(factor:number){
+    this.dce.setZoom(factor);
+  }
+
+  getMaxZoomFactor():number{
+    return this.dce.getMaxZoomFactor();
   }
 
   open(){

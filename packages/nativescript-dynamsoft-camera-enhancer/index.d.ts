@@ -7,10 +7,12 @@ export declare class CameraEnhancer extends CameraEnhancerCommon {
     getAllCameras(): string[];
     getSelectedCamera(): string;
     getCameraEnhancer(): any;
-    open(): void;
-    close(): void;
     getResolution(): Resolution;
     setResolution(resolution:Resolution): void;
+    setZoom(factor:number);
+    getMaxZoomFactor(): number;
+    open(): void;
+    close(): void;
 }
 
 export * from "./common";
